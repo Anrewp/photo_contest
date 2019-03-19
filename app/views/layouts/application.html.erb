@@ -2,14 +2,14 @@
 <html>
   <head>
     <title> <%= yield(:title) %> | EpicShots </title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-
-  <body>
-    <%= yield %>
-  </body>
+    <%= render 'layouts/rails_default' %>
+    <%= render 'layouts/shim' %>
+      </head>
+     <body class="<%= yield(:class) %>">
+       <%= render 'layouts/header' %>
+       <div class="container">
+         <%= yield %>
+       </div>
+       <%= render 'layouts/footer' %>
+     </body>
 </html>

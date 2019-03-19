@@ -1,6 +1,13 @@
 
 <% provide(:title, "Home") %>
-<h1>EpicShots</h1>
-<p>
-  This is the home page for the EpicShots application.
-</p>
+<% provide(:class, "home") %>
+<div class="center jumbotron">
+  <h1>Welcome to the</h1>
+  <h3>EPIC SHOTS</h3>
+
+  <h2>
+    This is the home page for the photo contest app.
+  </h2>
+
+  <%= link_to "Sign up now!", '#', class: "btn btn-lg btn-primary" %>
+</div>

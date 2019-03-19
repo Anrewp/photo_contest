@@ -1,0 +1,170 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* mixins, variables, etc. */
+
+$gray-medium-light: #eaeaea;
+
+/* universal */
+
+body {
+  padding-top: 100px;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+  h1 {
+    margin-bottom: 10px;
+  }
+}
+
+.jumbotron{
+
+  h1 {
+    color: white;
+  }
+  background: none;
+  background:rgba(0,0,0,0.15);
+  // opacity: 0.7;
+  h2 {
+    color: $gray-medium-light;
+  }
+}
+
+.nav {
+ float: right;
+ margin-right: 50px;
+ font-size: 1.2em;
+ margin-top: 12px;
+  btn{
+   color: #337ab7;
+ }
+}
+
+.navbar-inverse .navbar-nav .btn {
+  color: white;
+  margin-top: 7px;
+  padding-left: 15px;
+  padding-right:15px;
+  padding-top:  7px;
+  padding-bottom:7px;
+  box-sizing: content-box;
+  &:hover {
+    background-color:  #2e6da4;
+  }
+}
+
+body.home {
+
+  padding-top: 140px;
+  background-color: white;
+  background-image: url("background.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  // margin-right: 200px;
+  background-attachment: fixed;
+  // background-size: 900px 750px
+
+
+  // background: url('background.jpg');
+
+}
+
+
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+h1 {
+  // font-size: 2em;
+  font-size: 20px;
+  letter-spacing: -2px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+}
+
+h3 {
+  font-size: 3em;
+  font-size: 75px;
+  letter-spacing: -1.8px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-family: 'bebas-neue';
+  font-weight: bold;
+  color: #fff;
+  transform: scaleY(1.6);
+  line-height: 0.7;
+
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+
+/* header */
+
+#logo {
+  float: left;
+  margin-right: -1px;
+  font-size: 1.7em;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 3px;
+  font-weight: bold;
+  weight: 156px;
+  height: 68px;
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+/* footer */
+
+footer {
+  background-color: none;
+  margin-top: 245px;
+  padding-top: 5px;
+  padding-right: 15px;
+  padding-left:  15px;
+  border-top: 1px solid $gray-medium-light;
+  color: $gray-light;
+  a {
+    color: $gray;
+    &:hover {
+      color: $gray-darker;
+    }
+  }
+  small {
+    float: left;
+  }
+  ul {
+    float: right;
+    list-style: none;
+    li {
+      float: left;
+      margin-left: 15px;
+    }
+  }
+}
