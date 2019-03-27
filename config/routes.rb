@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
-  get 'users/new'
-  root 'static_pages#home'
-  get '/home',  to: 'static_pages#home'
-  get '/about', to: 'static_pages#about'
-  get '/signup',  to: 'users#new'
+  get     'users/new'
+  root    'static_pages#home'
+  get     '/home',                     to: 'static_pages#home'
+  get     '/about',                    to: 'static_pages#about'
+  get     '/signup',                   to: 'users#new'
+  get     '/auth/:provider/callback',  to: 'sessions#create'
+  delete  '/logout',                   to: 'sessions#destroy'
+  get     '/index',                    to: 'static_pages#index'
 end

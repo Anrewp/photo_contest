@@ -2,3 +2,20 @@
 <% provide(:class, 'signup') %>
 <h1>Sign up</h1>
 <p>This will be a signup page for new users.</p>
+<div id="container">
+  <% if current_user %>
+    <ul class="nav navbar-nav pull-left">
+      <li><%= image_tag current_user.image_url, alt: current_user.name %></li>
+      <li><%= link_to 'Log Out', logout_path, method: :delete %></li>
+    </ul>
+  <% else %>
+    <ul class="nav navbar-nav">
+      <div>
+        <%= link_to image_tag("VK.com-logo.svg", id: "logo"),
+                              '/auth/vkontakte' %>
+      </div>
+        <%= link_to image_tag("github-sign.svg", id: "logo"),
+                            '/auth/vkontakte' %>
+    </ul>
+  <% end %>
+</div>
