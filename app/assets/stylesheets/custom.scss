@@ -9,6 +9,8 @@ $gray-medium-light: #eaeaea;
 
 body {
   padding-top: 100px;
+  height: 100%;
+  min-width:900px;
 }
 
 section {
@@ -18,6 +20,8 @@ section {
 textarea {
   resize: vertical;
 }
+
+
 
 .center {
   text-align: center;
@@ -38,6 +42,7 @@ textarea {
     color: $gray-medium-light;
   }
 }
+
 
 .nav {
  float: right;
@@ -143,12 +148,23 @@ p {
 /* footer */
 
 footer {
+  // margin: 0;
   background-color: none;
-  margin-top: 245px;
+  // margin-top: 245px;
   padding-top: 5px;
   padding-right: 15px;
   padding-left:  15px;
+  // padding-bottom: 70px;
   border-top: 1px solid $gray-medium-light;
+  // position: absolute; bottom: 0;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+
+
+
   color: $gray-light;
   a {
     color: $gray;

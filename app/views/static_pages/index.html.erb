@@ -6,9 +6,8 @@
     <div class="panel-body">
       <ul>
         <li><%= image_tag current_user.image_url, alt: current_user.name, size: '50x50' %></li>
-        <li><strong>uID:</strong> <%= current_user.id %></li>
-        <li><strong>Name:</strong> <%= current_user.name %></li>
         <li><strong>Provider:</strong> <%= current_user.provider %></li>
+        <li><strong>Name:</strong> <%= current_user.name %></li>
         <li><strong>email:</strong> <%= current_user.email %></li>
       </ul>
     </div>
