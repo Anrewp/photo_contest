@@ -21,6 +21,9 @@ textarea {
   resize: vertical;
 }
 
+.container{
+  padding: 20px;
+}
 
 
 .center {
@@ -43,6 +46,12 @@ textarea {
   }
 }
 
+.photo{
+display: inline-block;
+padding-right: 5px;
+margin-bottom: 5px;
+}
+
 
 .nav {
  float: right;
@@ -52,6 +61,10 @@ textarea {
   btn{
    color: #337ab7;
  }
+}
+ 
+ .navbar-right img {
+  border-radius: 50%;
 }
 
 .navbar-inverse .navbar-nav .btn {

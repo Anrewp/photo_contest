@@ -1,0 +1,10 @@
+<div class="photo">
+  <%= link_to (image_tag(photo.picture.url, alt: 'Image') if photo.picture?), photo_path(photo) %> 
+  <div>
+  <% if current_user %> 
+  <%= link_to "delete", photo, method: :delete,
+                                       data: { confirm: "You sure?" },class: "btn btn-sm btn-danger" %>
+  </div>
+  <% end %>
+</div>
+

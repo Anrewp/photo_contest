@@ -12,6 +12,15 @@
       </ul>
     </div>
   </div>
+  <div>
+    <h1>Photo</h1>
+ 
+  <div class="container">
+      <%= link_to 'Add photo', new_user_photo_path(current_user),class: "btn btn-lg btn-success" %>
+
+    <hr>
+
+  </div>
 <% else %>
   <%= render 'static_pages/welcome' %>
 <% end %>

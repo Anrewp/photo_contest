@@ -1,0 +1,12 @@
+<div>
+<%= link_to 'All photos', photos_path %>
+</div>
+
+<%= image_tag(@photo.picture.url, alt: 'Image') if @photo.picture? %>
+ 
+ <div>
+  <% if current_user %> 
+  <%= link_to "delete", @photo, method: :delete,
+                                       data: { confirm: "You sure?" },class: "btn btn-sm btn-danger" %>
+  <% end %>
+ </div>

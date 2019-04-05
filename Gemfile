@@ -20,9 +20,12 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
+gem 'jquery-rails'
 
 gem 'omniauth-vkontakte'
 gem 'omniauth-github'
+gem 'carrierwave'
+gem 'mini_magick'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
@@ -64,6 +67,7 @@ end
 
 group :production do
   gem 'pg', '1.1.4'
+  gem "fog"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

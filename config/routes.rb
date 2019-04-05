@@ -6,4 +6,12 @@ Rails.application.routes.draw do
   get     '/auth/:provider/callback',  to: 'sessions#create'
   delete  '/logout',                   to: 'sessions#destroy'
   get     '/index',                    to: 'static_pages#index'
+  get     '/photos/index',             to: 'photos#index'
+  
+  resources :photos
+
+  resources :users do
+    resources :photos
+  end
+
 end
