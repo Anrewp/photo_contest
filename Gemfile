@@ -22,6 +22,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
 
+gem 'aasm'
 gem 'omniauth-vkontakte'
 gem 'omniauth-github'
 gem 'carrierwave'

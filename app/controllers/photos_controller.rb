@@ -1,9 +1,15 @@
 class PhotosController < ApplicationController
 
-  before_action :set_photo, only: [:show, :destroy]
+  before_action :set_photo, only: [:show, :destroy, 
+                                   :set_confirm, :set_reject,
+                                   :set_publish,:set_discard]
  
   def index
-    @photo = Photo.order('created_at DESC')
+    @photo = if current_user
+      @photo = Photo.order('created_at DESC')
+    else
+      @photo = Photo.published.order('created_at DESC')
+    end
   end
  
   def new ;end
@@ -33,16 +39,62 @@ class PhotosController < ApplicationController
   end
 
   def destroy
-  	@photo.destroy
-  	flash[:success] = "Photo deleted"
-  	redirect_to photos_path
+    @photo.destroy
+    flash[:success] = "Photo deleted"
+    redirect_to photos_path
   end
  
+  def set_confirm
+    debugger 
+    if @photo.unmoderated?
+      @photo.confirm! 
+      flash[:success] = "Verefied"
+      redirect_to photo_path(@photo)
+    else
+      flash[:danger] = "Can't be verefied"
+      redirect_to photo_path(@photo)
+    end
+  end
+
+  def set_reject
+    if @photo.unmoderated?
+      @photo.reject! 
+      flash[:success] = "Rejected"
+      redirect_to photo_path(@photo)
+    else
+      flash[:danger] = "Can't be rejected"
+      redirect_to photo_path(@photo)
+    end
+  end
+
+  def set_publish
+    if @photo.verified?
+      @photo.publish! 
+      flash[:success] = "Published"
+      redirect_to photo_path(@photo)
+    else
+      flash[:danger] = "Can't be published"
+      redirect_to photo_path(@photo)
+    end
+  end
+
+  def set_discard
+    if @photo.verified? || @photo.rejected? || @photo.published?
+      @photo.discard! 
+      flash[:success] = "Discarded"
+      redirect_to photo_path(@photo)
+    else
+      flash[:danger] = "Can't be discarded"
+      redirect_to photo_path(@photo)
+    end
+  end
+
   private
  
   def photo_params
     params.require(:photo).permit(:picture)
   end
+
  
   def set_photo
     @photo = Photo.find(params[:id])

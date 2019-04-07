@@ -3,10 +3,24 @@
 </div>
 
 <%= image_tag(@photo.picture.url, alt: 'Image') if @photo.picture? %>
- 
+<% if current_user %> 
+<div class="conteiner" style="display: inline-flex" > <%= @photo.state %> </div>
  <div>
-  <% if current_user %> 
+ <div class="conteiner" style="display: inline-flex" >
+  <% if @photo.verified? %> 
+  <%= button_to 'Publish', set_publish_photo_path(@photo),class: "btn btn-sm btn-info"%>
+  <% else %> 
+  <%= button_to 'Verifie', set_confirm_photo_path(@photo),class: "btn btn-sm btn-info"%>
+  <% end %> 
+
+  <%= button_to 'Reject', set_reject_photo_path(@photo),class: "btn btn-sm btn-info"%>
+
+
+  <%= button_to 'Discard', set_discard_photo_path(@photo),class: "btn btn-sm btn-info"%>
+  
   <%= link_to "delete", @photo, method: :delete,
                                        data: { confirm: "You sure?" },class: "btn btn-sm btn-danger" %>
+
   <% end %>
+ </div>
  </div>
