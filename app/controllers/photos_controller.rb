@@ -45,7 +45,6 @@ class PhotosController < ApplicationController
   end
  
   def set_confirm
-    debugger 
     if @photo.unmoderated?
       @photo.confirm! 
       flash[:success] = "Verefied"
