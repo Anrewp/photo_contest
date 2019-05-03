@@ -1,5 +1,7 @@
 {
   "name": "photo_contest",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "lightbox2": "^2.11.0"
+  }
 }

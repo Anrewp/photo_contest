@@ -1,11 +1,91 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+
 /* mixins, variables, etc. */
 
 $gray-medium-light: #eaeaea;
 
 /* universal */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  height: 100%;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.content {
+  flex: 1 0 auto;
+}
+.footer {
+  flex: 0 0 auto;
+  margin-bottom: 20px;
+}
+.photo-load{
+
+  margin-right:10px;
+  margin-bottom:10px;
+  display: inline-block;
+  vertical-align: bottom;
+}
+#uploadFileName{
+  width:20%;
+  overflow: hidden;
+}
+.img-rounded{
+margin: 5px;
+margin-bottom: 0px;
+border-radius:2%;
+  &:hover {
+border:1px solid #298381;
+    opacity:0.8;
+  }
+}
+
+.col-lg-3{
+  margin-bottom: 15px;
+}
+.content{
+padding: 0px;
+margin:0px;
+}
+
+.thumbnail{
+  position: relative;
+  min-height: 225px;
+  min-width: 210px;
+  margin:0px;
+  padding:0px;
+  max-width: 210px;
+  /*background-color:#F2F2F2;*/
+  border:none;
+  border-radius: 2%;
+}
+.thumb-info{
+  padding-left:2%;
+  padding-right:2%;
+  display:flex;
+  justify-content: space-between;
+  float:right;
+}
+.add-photo{
+  display: block;
+  margin-bottom: 20px;
+  margin-left:4%;
+}
+.lb-caption a.btn {
+  float:right;
+}
+ a.btn.btn-m.btn-danger {
+  color:white;
+  }
 
 body {
   padding-top: 100px;
@@ -161,22 +241,10 @@ p {
 /* footer */
 
 footer {
-  // margin: 0;
-  background-color: none;
-  // margin-top: 245px;
-  padding-top: 5px;
-  padding-right: 15px;
-  padding-left:  15px;
-  // padding-bottom: 70px;
+  
   border-top: 1px solid $gray-medium-light;
-  // position: absolute; bottom: 0;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100px;
-
-
+  padding-left: 15px;
+  padding-right: 15px;
 
   color: $gray-light;
   a {

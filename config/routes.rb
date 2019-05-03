@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  ActiveAdmin.routes(self)
   root    'static_pages#home'
   get     '/home',                     to: 'static_pages#home'
   get     '/about',                    to: 'static_pages#about'
@@ -7,19 +8,9 @@ Rails.application.routes.draw do
   delete  '/logout',                   to: 'sessions#destroy'
   get     '/index',                    to: 'static_pages#index'
   get     '/photos/index',             to: 'photos#index'
-  # post    '/photos/:id',               to: 'photos#set_confirm' , as: 'photo'
-
+  get     '/register_admin!',          to: 'application#register_admin!'
   
   resources :photos
-
-  resources :photos do
-    member do
-      post :set_confirm
-      post :set_reject
-      post :set_publish
-      post :set_discard
-    end
-  end
 
   resources :users do
     resources :photos

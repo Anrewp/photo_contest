@@ -1,10 +1,11 @@
 
 <h1>Photos</h1>
  <% if current_user %>
- <div class="container">
-	<%= link_to 'Add photo', new_user_photo_path(current_user),class: "btn btn-lg btn-success" %>
+	
+ <div class="add-photo">
+	<%= render 'form', photo: @photo %>
 </div>
 	<%= render @photo %>
  <% else %>
- 	<%= render @photo %>
+   <%= render @photo %>
  <% end %>

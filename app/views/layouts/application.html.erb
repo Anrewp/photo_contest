@@ -4,15 +4,23 @@
     <title> <%= yield(:title) %> | EpicShots </title>
     <%= render 'layouts/rails_default' %>
     <%= render 'layouts/shim' %>
-      </head>
+  </head>
      <body class="<%= yield(:class) %>">
-       <%= render 'layouts/header' %>
-       <div class="container">
-         <% flash.each do |message_type, message| %>
-           <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
-         <% end %>
-         <%= yield %>
+      <div class="wrapper">
+        <div class="content">
+          <%= render 'layouts/header' %>
+          <div class="container">
+             <% flash.each do |message_type, message| %>
+               <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+             <% end %>
+             <%= yield %>
+          </div>
+        </div>
+
+        <div class="footer">
+          <%= render 'layouts/footer' %>
+        </div>
        </div>
-       <%= render 'layouts/footer' %>
+       <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
      </body>
 </html>

@@ -1,10 +1,7 @@
-<div class="photo">
-  <%= link_to (image_tag(photo.picture.url, alt: 'Image') if photo.picture?), photo_path(photo) %> 
-  <div>
-  <% if current_user %> 
-  <%= link_to "delete", photo, method: :delete,
-                                       data: { confirm: "You sure?" },class: "btn btn-sm btn-danger" %>
+<div class="col-lg-3 col-md-3 col-sm-4" >
+	<div class="thumbnail">
+  <%= link_to (image_tag(photo.picture.url(:medium),class:'img-rounded',alt: 'Image') if photo.picture?), photo.picture.url, data: {
+  	lightbox: "example-set", title: (link_to "delete", photo, method: :delete, data: { confirm: "You sure?" },class: 'btn btn-m btn-danger' if current_user && current_user.id.equal?(photo.user_id))
+  } %> 
   </div>
-  <% end %>
 </div>
-
