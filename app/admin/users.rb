@@ -24,7 +24,7 @@ filter :admin
 index do
   column :id
   column do |user|
-  	link_to (image_tag user.image_url if user.image_url?), admin_user_path(user.id)
+  	link_to (image_tag user.image_url, size: "50x50" if user.image_url?), admin_user_path(user.id)
   end
   column :name do |user|
   	link_to user.name, admin_user_path(user.id)
@@ -55,14 +55,14 @@ controller do
 private
 
   def user_params
-    params.require(:user).permit(:name, :email, :token, :provider, :admin)
+    params.require(:user).permit(:name, :email, :token, :provider, :admin, :image_url)
   end
 end
 
   show do
     attributes_table do
       row :avatar do
-      	image_tag user.image_url if user.image_url?
+      	image_tag user.image_url, size: "50x50" if user.image_url?
       end
       row :id
       row :name

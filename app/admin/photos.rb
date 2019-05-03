@@ -71,7 +71,7 @@ show do
       end
       row :avatar do |photo|
       	user = User.find(photo.user_id)
-      	link_to (image_tag user.image_url if user.image_url?), admin_user_path(user.id)
+      	link_to (image_tag user.image_url,size: "50x50" if user.image_url?), admin_user_path(user.id)
       end
       row :state
       row :photo do
