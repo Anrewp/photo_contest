@@ -1,6 +1,8 @@
+<% if !current_user %>
 <% provide(:title, "Home") %>
 <% provide(:class, "home") %>
-<div class="center jumbotron">
+<div class="container">
+<div class="center jumbotron jum-home">
   <h1>Welcome to the</h1>
   <h3>EPIC SHOTS</h3>
 
@@ -10,3 +12,10 @@
 
   <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
 </div>
+</div>
+<% else %>
+<h1>Gallery</h1>
+<div class="container jumbotron">
+   <%= render @photo %>
+</div>
+<% end %>

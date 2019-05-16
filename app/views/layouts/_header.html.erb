@@ -1,26 +1,40 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
+<header class="navbar navbar-fixed-top navbar-inverse <%= yield(:show) %>">
   <div class="container-left">
+    <%=link_to image_tag("shine.png",id: "shine", size: "50x50"), root_path %>
     <%= link_to image_tag("logo.svg", id: "logo"),
                           root_path %>
     <% if current_user %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= image_tag current_user.image_url, alt: current_user.name, size: '50x50' %></li>
-        <li><%= link_to 'Log Out', logout_path, method: :delete %></li>
+        <li><div><%= link_to (image_tag current_user.image_url, alt: current_user.name, size: '50x50'), current_user %></div></li>
+
+        <div class="dropdown">
+          <button onclick="dropdownMenu()" class="dropbtn" >
+              Account <b class="caret"></b></button>
+         <div id="myDropdown" class="dropdown-content"> 
+           <li><%= link_to "Profile", current_user %></li>
+           <li><%= link_to "Settings", edit_user_path(current_user.id) %></li> 
+           <li ><%= link_to 'Log Out', logout_path, method: :delete %></li>
+         </div>
+        </div>
+
       </ul>
     </nav>
     <% else %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Log in", '#' %></li>
         <li><%= link_to "Sig up", signup_path, class: "btn btn-lg btn-primary" %></li>
       </ul>
     </nav>
     <% end %>
     <nav>
       <ul class="nav navbar-nav navbar-left">
-        <li><%= link_to "Photos",   photos_path %></li>
-        <li><%= link_to "Rating",   '#' %></li>
+        <li><div><%=image_tag ('shine.png'),size: '50x50' %></div>
+          <%= link_to "Gallery", photos_path if !current_user %>
+        </li>
+        <li><div><%=image_tag ('shine.png'),size: '50x50' %></div>
+          <%= link_to "Rating",   '#' %>
+        </li>
       </ul>
     </nav>
   </div>

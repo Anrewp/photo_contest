@@ -1,0 +1,14 @@
+<%= form_for @photo do |f| %>
+
+
+<div class="jumbotron jum-edit">
+<div class="photo-show-img edit-show">
+  <%= image_tag(@photo.picture.url, alt: 'Image') if @photo.picture? %>
+<div> <%= f.text_field :name, id:"photo-edit-title" %> </div>
+
+<div class="edit-btn"><%= f.submit "Update Photo", class: 'btn btn-m btn-success' %></div>
+</div>
+</div>
+
+
+<% end %>

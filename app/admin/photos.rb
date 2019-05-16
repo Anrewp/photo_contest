@@ -11,7 +11,7 @@ ActiveAdmin.register Photo do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
-permit_params :user_id, :state, :picture
+permit_params :user_id, :state, :picture, :name
 
 scope :all
 scope :unmoderated
@@ -22,11 +22,11 @@ filter :state, as: :select
 filter :user, as: :select
 
 action_item :publish, only: :show do
-	link_to "Publish", publish_admin_photo_path, style: 'color: #009A03;',method: :put if photo.unmoderated?
+	link_to "Publish", publish_admin_photo_path, style: 'color: #009A03;',method: :put if photo.unmoderated? || photo.rejected?
 end
 
 action_item :reject, only: :show do
-	link_to "Reject", reject_admin_photo_path, style: 'color: #AF0000;', method: :put if photo.unmoderated?
+	link_to "Reject", reject_admin_photo_path, style: 'color: #AF0000;', method: :put if photo.unmoderated? || photo.verified?
 end
 
 member_action :publish, method: :put do
@@ -42,9 +42,15 @@ member_action :reject, method: :put do
 end
 
 index do
+  column :id do |photo|
+    photo.id
+  end
   column :Photo do |photo|
    link_to (image_tag photo.picture_url(:small)), admin_photo_path(photo.id)
   end#.order('created_at DESC')
+  column :title do |photo|
+    photo.name
+  end
   column :State do |photo|
     photo.state
   end
@@ -54,8 +60,8 @@ index do
   end
 
   actions defaults: false do |photo|
-    item "Publish", publish_admin_photo_path(photo.id), style: 'color: #B2E8B3;',class: "button", method: :put if photo.unmoderated?
-    item "Reject", reject_admin_photo_path(photo.id), style: 'color: #F8B5B5;',class: "button", method: :put if photo.unmoderated?
+    item "Publish", publish_admin_photo_path(photo.id), style: 'color: #B2E8B3;',class: "button", method: :put if photo.unmoderated? || photo.rejected?
+    item "Reject", reject_admin_photo_path(photo.id), style: 'color: #F8B5B5;',class: "button", method: :put if photo.unmoderated? || photo.verified?
     item "Edit", edit_admin_photo_path(photo.id),class: "button"
     item "Delete", admin_photo_path(photo.id),style: 'color: #FF8686;',class: "button", method: :delete,data: { confirm: "You sure?" }
   end

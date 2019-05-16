@@ -1,7 +1,7 @@
 class StaticPagesController < ApplicationController
   def home
   	if current_user
-  		redirect_to photos_index_path
+  	  @photo = Photo.verified.order('created_at DESC')
   	end
   end
   def index; end

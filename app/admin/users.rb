@@ -19,7 +19,6 @@ filter :id
 filter :name
 filter :email
 filter :provider
-filter :admin
 
 index do
   column :id
@@ -31,7 +30,6 @@ index do
   end
   column :email
   column :provider
-  column :admin
   column do |user|
   	link_to 'DELETE',admin_user_path(user.id), method: :delete,
   	                                           data: { confirm: "You sure?" },
@@ -55,7 +53,7 @@ controller do
 private
 
   def user_params
-    params.require(:user).permit(:name, :email, :token, :provider, :admin, :image_url)
+    params.require(:user).permit(:name, :email, :token, :provider, :image_url)
   end
 end
 
@@ -68,7 +66,6 @@ end
       row :name
       row :email
       row :provider
-      row :admin
     end
 
 

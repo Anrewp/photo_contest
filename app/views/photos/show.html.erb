@@ -1,11 +1,26 @@
+<% provide(:show, "pgshow") %>
+<% provide(:class, "pgbody") %>
+<div class="photo-show-warp">
+<div class="photo-show">
 
-<%= link_to 'All photos', photos_path %>
 
+<div class="photo-show-img">
+  <%= image_tag(@photo.picture.url, alt: 'Image',id:"imageshow") if @photo.picture? %>
+  
+</div>
 
-<%= image_tag(@photo.picture.url, alt: 'Image') if @photo.picture? %>
+</div> 
 
-<% if current_user && current_user.id.equal?(@photo.user_id) %> 
- <%= link_to "delete", @photo, method: :delete,
-                                       data: { confirm: "You sure?" },class: "btn btn-sm btn-danger" %>
-  <% end %>
- 
+<div class="photo-comments">
+	<div class="user">
+	<div class="user-avater"><%= image_tag(@user.image_url,size: "50x50", alt: 'Image',id:"imageshow") if @user.image_url? %></div>
+	<div class="user-name">
+	  <%= @user.name %>
+	  <div class="user-title"><h4><%= @photo.name %></h4></div>
+			
+	</div>
+	</div>
+
+</div>
+
+</div>

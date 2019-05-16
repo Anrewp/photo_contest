@@ -1,11 +1,4 @@
-
-<h1>Photos</h1>
- <% if current_user %>
-	
- <div class="add-photo">
-	<%= render 'form', photo: @photo %>
-</div>
-	<%= render @photo %>
- <% else %>
+<h1>Gallery</h1>
+<div class="container jumbotron">
    <%= render @photo %>
- <% end %>
+</div>

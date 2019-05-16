@@ -2,6 +2,8 @@
 <html>
   <head>
     <title> <%= yield(:title) %> | EpicShots </title>
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Corben" rel="stylesheet">
     <%= render 'layouts/rails_default' %>
     <%= render 'layouts/shim' %>
   </head>
@@ -9,18 +11,14 @@
       <div class="wrapper">
         <div class="content">
           <%= render 'layouts/header' %>
-          <div class="container">
              <% flash.each do |message_type, message| %>
                <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
              <% end %>
              <%= yield %>
-          </div>
         </div>
-
         <div class="footer">
           <%= render 'layouts/footer' %>
         </div>
        </div>
-       <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
      </body>
 </html>

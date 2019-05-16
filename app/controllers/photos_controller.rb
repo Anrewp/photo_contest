@@ -1,39 +1,65 @@
 class PhotosController < ApplicationController
 
-  before_action :set_photo, only: [:show, :destroy]
+  before_action :set_photo, only: [:show, :destroy, :edit, :update]
  
   def index
     @photo = Photo.verified.order('created_at DESC')
   end
  
-  def show ; end
+  def show 
+   unless current_user && current_user.id.equal?(@photo.user_id) || @photo.verified?
+     redirect_to root_path 
+   else @user = User.find(@photo.user_id)
+   end
+
+  end
+
+  def edit
+    if current_user && current_user.id.equal?(@photo.user_id)
+     return @photo 
+    else redirect_to root_path
+    end
+  end
  
   def create
     if params[:photo]
       @photo = current_user.photos.build(photo_params)
       if @photo.save
-        redirect_to photos_path
+        redirect_to user_path(current_user.id)
         flash[:success] = "Photo Created"
       else
-        flash.now[:danger] = @photo.errors.details[:picture][0].values
-        render :new
+        flash[:danger] = @photo.errors.details[:name][0].values
+        redirect_to current_user
       end
-    else render :new
+    else redirect_to current_user
     end
+  end
+
+  def update
+   if current_user && current_user.id.equal?(@photo.user_id)
+     @photo.name = params[:photo][:name]
+     if @photo.save
+       flash[:success] = "Photo Updeated successfully!"
+       redirect_to current_user
+     else
+       flash.now[:danger] = "Something whent wrong!"
+       render :edit
+     end
+   else redirect_to root_path
+   end
   end
 
   def destroy
     if current_user && current_user.id.equal?(@photo.user_id)
       @photo.destroy
-      flash[:success] = "Photo deleted"
-      redirect_to photos_path
+      head :no_content
     end
   end
  
   private
  
   def photo_params
-    params.require(:photo).permit(:picture)
+    params.require(:photo).permit(:picture,:name)
   end
 
  

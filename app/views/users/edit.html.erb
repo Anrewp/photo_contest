@@ -1,0 +1,26 @@
+<%= form_for @user do |f| %>
+
+  <div class="profile edit"><h1>Settings</h1></div>
+    <div class="profile-edit">
+
+      <ul>
+        <li><%= image_tag current_user.image_url, alt: current_user.name, size: '50x50' %>
+        </li>
+        <li><strong>Image url:</strong></li>
+        <li><strong>Name:</strong> </li>
+        <li><strong>Email:</strong></li>
+        <li><strong>Provider:</strong></li>
+        <li><%= f.submit "Update User", class: 'btn btn-m btn-success' %></li>
+      </ul>
+
+      <ul class="right">
+      	<li><%= f.text_field :image_url %></li>
+      	<li><%= f.text_field :name %></li>
+      	<li><%= f.text_field :email %></li>
+      	<li><%= f.text_field :provider %></li>
+      </ul>
+
+     
+  </div>
+
+<% end %>
