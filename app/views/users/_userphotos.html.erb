@@ -11,7 +11,9 @@
   	 <div><%=link_to "SHOW", photo_path(userphotos.id) %></div>
   	 <div><%=link_to "EDIT", edit_photo_path(userphotos.id) %></div>
      <div><%=link_to "DELETE", photo_path(userphotos.id), id:userphotos.id, class:"photo-delete-link" %></div>
+    <div class="photo-info-like"><%= image_tag 'Thumbs_up.svg', size: '20x20' %>
+      <div><%= userphotos.likes.count %></div>
+    </div>
   </div>
-
   </div>
 </div>

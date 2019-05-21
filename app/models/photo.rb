@@ -1,15 +1,16 @@
 class Photo < ApplicationRecord
   include AASM
-  belongs_to :user
-  mount_uploader :picture, PhotoUploader
-  validates :picture, presence: true
-  validates :name , length: { maximum: 70 }
-  validate :picture_name
-  validate :picture_size
+  belongs_to     :user
+  has_many       :likes,      dependent: :destroy
+  mount_uploader :picture,    PhotoUploader
+  validates      :picture,    presence: true
+  validates      :name,       length: { maximum: 70 }
+  validate       :picture_name
+  validate       :picture_size
 
   scope :unmoderated, ->{ where(state: :unmoderated)}
-  scope :published, ->{ where(state: :verified)}
-  scope :rejected, ->{ where(state: :rejected)}
+  scope :published,   ->{ where(state: :verified)}
+  scope :rejected,    ->{ where(state: :rejected)}
 
 	aasm column: 'state' do
   	state :unmoderated, initial: true

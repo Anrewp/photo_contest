@@ -1,0 +1,4 @@
+$("#like").html("<%= escape_javascript(render('likes/create')) %>");
+$(".photo-like-count").html('<%= @photo.likes.count %>');
+$("#photo<%= @photo.id %>").html("<%= escape_javascript(render('photos/photo2')) %>");
+$(".photo-comments-like").html("<%= escape_javascript(render('likes/comment_likes')) %>");

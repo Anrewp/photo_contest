@@ -8,12 +8,18 @@ Rails.application.routes.draw do
   delete  '/logout',                   to: 'sessions#destroy'
   get     '/index',                    to: 'static_pages#index'
   get     '/photos/index',             to: 'photos#index'
-  get     '/register_admin!',          to: 'application#register_admin!'
   
-  resources :photos
-
+  # post :check_data_provider_connection, format: :js
+  
   resources :users do
     resources :photos
   end
+  
+  post '/users/:id' => 'photos#create', defaults: { format: 'js' }
+
+   resources :photos do
+    resources :likes
+  end
+
 
 end

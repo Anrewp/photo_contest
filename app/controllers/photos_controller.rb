@@ -25,13 +25,17 @@ class PhotosController < ApplicationController
     if params[:photo]
       @photo = current_user.photos.build(photo_params)
       if @photo.save
-        redirect_to user_path(current_user.id)
-        flash[:success] = "Photo Created"
+        @userphotos = current_user.photos.order('created_at DESC')
+        respond_to do |format|
+          format.html { redirect_to current_user }
+          format.js
+        end
+        # render 'create.js.erb'
       else
         flash[:danger] = @photo.errors.details[:name][0].values
         redirect_to current_user
       end
-    else redirect_to current_user
+    else 
     end
   end
 

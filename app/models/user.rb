@@ -1,6 +1,7 @@
 class User < ApplicationRecord
-  has_many :photos, dependent: :destroy
-  validates :email, presence: true
+  has_many  :photos, dependent: :destroy
+  has_many  :likes,  dependent: :destroy
+  validates :email,    presence: true
   validates :provider, presence: true
 
   def User.from_omniauth(auth_hash)

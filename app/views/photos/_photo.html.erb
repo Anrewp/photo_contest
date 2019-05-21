@@ -1,7 +1,25 @@
-<div class="col-lg-3 col-md-3 col-sm-4" >
+<div class="col-lg-3 col-md-3 col-sm-4" id="photo<%= photo.id %>" >
 	<div class="thumbnail">
+
+  <% pre_like = photo.likes.find { |like| like.user_id == current_user.id  } if current_user %>
+
   <%= link_to (image_tag(photo.picture.url(:medium),class:'img-rounded',alt: 'Image') if photo.picture?), photo.picture.url, data: {
-  	lightbox: "example-set", title: "#{photo.name}" + (link_to "delete", photo, method: :delete, data: { confirm: "You sure?" },class: 'btn btn-m btn-danger' if current_user && current_user.id.equal?(photo.user_id)).to_s + (link_to "Show", photo, class: 'btn btn-m btn-success').to_s
+  	lightbox: "example-set", 
+
+  	title: "#{photo.name}" + 
+
+  	"<div class='photo-like'>" + 
+
+  	(link_to (image_tag('Thumbs_up2.svg',size: "35x35")), photo_likes_path(photo), remote:true,id: 'like', method: :post if !pre_like && current_user ).to_s + 
+
+  	(link_to (image_tag('Thumbs_up02.svg',size: "35x35")), photo_like_path(photo, pre_like),remote:true,id: 'unlike', method: :delete if pre_like).to_s + 
+
+      (image_tag('Thumbs_up2.svg',size: "35x35") if !current_user).to_s +
+
+    "<div class='photo-like-count'>" + (photo.likes.count ).to_s + "</div>" +
+
+  	(link_to (image_tag('comments02.svg',size: "40x40")), photo).to_s + 
+  	"</div>"
   } %> 
   </div>
 </div>

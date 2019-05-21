@@ -1,4 +1,4 @@
-<%= form_for(current_user.photos.build) do |f| %>
+<%= form_with(model: @userphotos.build, url: user_path(current_user.id)) do |f| %>
   <div class="photo-load">
     <%= f.label :picture,"Add Photo", class: 'btn btn-m btn-success' %></div>
 
@@ -11,7 +11,7 @@
   
 
   <div class="photo-load">
-    <img id="img_prev" style="display: none;" src="#" />
+    <img id="img_prev" style="display: none;">
   </div>
 
   <div class="photo-load" id="uploadFileName"></div>
