@@ -1,0 +1,19 @@
+<div class="col-lg-4 col-md-5 col-sm-6 imgspace" id="photo<%= user_photos.id %>">
+	<div class="thumbnail thumb2">
+ <div class="imgwarp"> <%= link_to (image_tag(user_photos.picture.url(:medium),class:'img-rounded imgr2',alt: 'Image') if user_photos.picture?), user_photos.picture.url, data: {
+  	lightbox: "example-set", title: "#{user_photos.name}"
+  } %> </div>
+
+  
+  <div class="photo-info"> 
+     <div class="title"><strong>Title: </strong><%= user_photos.name %></div>
+  	 <div class="<%= user_photos.state %> state"><strong>state:</strong> <%= user_photos.state %></div>
+  	 <div><%=link_to "SHOW", photo_path(user_photos.id) %></div>
+  	 <div><%=link_to "EDIT", edit_photo_path(user_photos.id) %></div>
+     <div><%=link_to "DELETE", photo_path(user_photos.id), id:user_photos.id, class:"photo-delete-link" %></div>
+    <div class="photo-info-like"><%= image_tag 'Thumbs_up.svg', size: '20x20' %>
+      <div><%= user_photos.likes.count %></div>
+    </div>
+  </div>
+  </div>
+</div>

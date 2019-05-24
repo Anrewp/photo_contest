@@ -26,23 +26,24 @@ $('#shine').hover(
   function(){$('#shine').css('display', 'block')}, 
   function(){$('#shine').css('display', 'none')}
 );
-// Show photo info
-$('.img-rounded').hover(
-  function(){$(this).parents(':eq(2)').find('.photo-info').css('display', 'block')}, 
-  function(){$(this).parents(':eq(2)').find('.photo-info').css('display', 'none')}
-);
-
-$('.photo-info').hover(
-  function(){
-    $(this).parents(':eq(1)').find('.img-rounded').toggleClass("hover");
-    $(this).css('display', 'block');
-  }, 
-  function(){
-
-    // $(this).parents(':eq(1)').find('.img-rounded').trigger(e.type)
-    $(this).parents(':eq(1)').find('.img-rounded').toggleClass("hover");
-    $(this).css('display', 'none')
-  }
-
-);
 });
+// Show photo info
+$(document).on({
+    mouseenter: function(){
+      $(this).parents(':eq(2)').find('.photo-info').css('display', 'block')
+    },
+    mouseleave: function(){
+      $(this).parents(':eq(2)').find('.photo-info').css('display', 'none')
+    }
+  }, '.img-rounded');
+
+$(document).on({
+    mouseenter: function(){
+      $(this).parents(':eq(1)').find('.img-rounded').toggleClass("hover");
+      $(this).css('display', 'block');
+    },
+    mouseleave: function(){
+      $(this).parents(':eq(1)').find('.img-rounded').toggleClass("hover");
+    $(this).css('display', 'none')
+    }
+  }, '.photo-info');

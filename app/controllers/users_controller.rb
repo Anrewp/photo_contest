@@ -1,17 +1,14 @@
 class UsersController < ApplicationController
+  before_action :current_user?, only: [:show, :edit]
 
   def edit
-    if current_user 
-      @user = User.find(current_user.id)
-    else redirect_to root_path
-    end
+    @user = User.find(current_user.id)
   end
 
   def update
   	@user = User.find(current_user.id)
   	@user.name      = params[:user][:name]
   	@user.image_url = params[:user][:image_url]
-
   	if @user.save
   		flash[:success] = "User Updeated successfully!"
   		redirect_to @user
@@ -22,15 +19,16 @@ class UsersController < ApplicationController
   end
 
   def show
-    if current_user
-      @userphotos = current_user.photos.order('created_at DESC')
-    else redirect_to root_path
-    end
+    @user_photos = current_user.photos.order('created_at DESC')
   end
 
  private
 
   def user_params
     params.require(:user).permit(:name, :image_url)
+  end
+
+  def current_user?
+   redirect_to root_path if !current_user
   end
 end

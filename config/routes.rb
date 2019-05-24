@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   root    'static_pages#home'
   get     '/home',                     to: 'static_pages#home'
@@ -8,14 +9,11 @@ Rails.application.routes.draw do
   delete  '/logout',                   to: 'sessions#destroy'
   get     '/index',                    to: 'static_pages#index'
   get     '/photos/index',             to: 'photos#index'
-  
-  # post :check_data_provider_connection, format: :js
+  get     '/rating',                   to: 'static_pages#rating'
   
   resources :users do
     resources :photos
   end
-  
-  post '/users/:id' => 'photos#create', defaults: { format: 'js' }
 
    resources :photos do
     resources :likes

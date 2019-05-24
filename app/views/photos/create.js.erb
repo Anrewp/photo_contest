@@ -1,1 +1,2 @@
-$(".profile-photos").html("<%= escape_javascript(render('users/userphotos2')) %>");
+$(".profile-photos").html("<%= escape_javascript(render('users/photo_collection')) %>");
+$("#new_photo").html("<%= j(render('users/form')) %>");

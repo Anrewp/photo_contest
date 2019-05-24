@@ -1,4 +1,4 @@
-<%= form_with(model: @userphotos.build, url: user_path(current_user.id)) do |f| %>
+<%= form_for(@user_photos.build, format: :js, remote: true) do |f| %>
   <div class="photo-load">
     <%= f.label :picture,"Add Photo", class: 'btn btn-m btn-success' %></div>
 

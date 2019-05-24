@@ -8,7 +8,6 @@ class LikesController < ApplicationController
    else
     @photo.likes.create(user_id: current_user.id)
     respond_to do |format|
-      format.html { redirect_to photos_path }
       format.js
     end
    end
@@ -20,7 +19,6 @@ class LikesController < ApplicationController
     else
       @like.destroy
       respond_to do |format|
-        format.html { redirect_to photos_path }
         format.js
       end
     end

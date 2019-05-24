@@ -1,5 +1,4 @@
-$(document).on('ready turbolinks:load', function() {
-$('.photo-delete-link').on('click', function(e) {
+$(document).on('click', '.photo-delete-link' , function(e) {
         e.preventDefault();
         var data = "Are you sure?";
         var photoId = $(this).attr('id');
@@ -17,5 +16,4 @@ $('.photo-delete-link').on('click', function(e) {
             }
         });
     }
-  });
 });

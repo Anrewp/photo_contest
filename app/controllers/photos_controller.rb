@@ -1,46 +1,39 @@
 class PhotosController < ApplicationController
 
-  before_action :set_photo, only: [:show, :destroy, :edit, :update]
- 
+  before_action :set_photo,       only: [:show, :destroy, :edit, :update]
+  before_action :user_photo?,     only: [:edit, :update, :destroy]
+  before_action :photo_verified?, only: :show
+
   def index
-    @photo = Photo.verified.order('created_at DESC')
+    @photo = Photo.verified.order("(select count(*) from likes where likes.photo_id = photos.id) desc, created_at desc")
   end
  
   def show 
-   unless current_user && current_user.id.equal?(@photo.user_id) || @photo.verified?
-     redirect_to root_path 
-   else @user = User.find(@photo.user_id)
-   end
-
+    @user = User.find(@photo.user_id)
   end
 
   def edit
-    if current_user && current_user.id.equal?(@photo.user_id)
-     return @photo 
-    else redirect_to root_path
-    end
+    @photo 
   end
  
+  def destroy
+    @photo.destroy
+  end
+
   def create
-    if params[:photo]
-      @photo = current_user.photos.build(photo_params)
-      if @photo.save
-        @userphotos = current_user.photos.order('created_at DESC')
-        respond_to do |format|
-          format.html { redirect_to current_user }
-          format.js
-        end
-        # render 'create.js.erb'
-      else
-        flash[:danger] = @photo.errors.details[:name][0].values
+    @photo = current_user.photos.build(photo_params)
+    if @photo.save
+    @user_photos = current_user.photos.order('created_at DESC')
+    respond_to do |format|
+      format.js
+    end
+    else
+      flash[:danger] = @photo.errors.details[:name][0].values
         redirect_to current_user
-      end
-    else 
     end
   end
 
   def update
-   if current_user && current_user.id.equal?(@photo.user_id)
      @photo.name = params[:photo][:name]
      if @photo.save
        flash[:success] = "Photo Updeated successfully!"
@@ -49,23 +42,25 @@ class PhotosController < ApplicationController
        flash.now[:danger] = "Something whent wrong!"
        render :edit
      end
-   else redirect_to root_path
-   end
-  end
-
-  def destroy
-    if current_user && current_user.id.equal?(@photo.user_id)
-      @photo.destroy
-      head :no_content
-    end
   end
  
-  private
+private
  
   def photo_params
     params.require(:photo).permit(:picture,:name)
   end
 
+  def user_photo?
+    if current_user && current_user.id.equal?(@photo.user_id)
+    else redirect_to root_path
+    end
+  end
+
+  def photo_verified?
+    if current_user && current_user.id.equal?(@photo.user_id) || @photo.verified?
+    else redirect_to root_path
+    end
+  end
  
   def set_photo
     @photo = Photo.find(params[:id])

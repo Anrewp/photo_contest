@@ -14,8 +14,7 @@ function readURL(input) {
       }
 
   
- $(document).on('ready turbolinks:load', function() { 
-  $('#photo_picture').bind('change', function() {
+ $(document).on('change','#photo_picture', function() { 
     if(this.files[0] != undefined){
     var size_in_megabytes = this.files[0].size/1024/1024;
     if (size_in_megabytes > 5) {
@@ -44,5 +43,4 @@ function readURL(input) {
     $('#photo_name').css("display","none");
     $('#photo-label').css("display","none");
   }
-  });
   });
