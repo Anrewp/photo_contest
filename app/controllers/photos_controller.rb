@@ -5,7 +5,7 @@ class PhotosController < ApplicationController
   before_action :photo_verified?, only: :show
 
   def index
-    @photo = Photo.verified.order("(select count(*) from likes where likes.photo_id = photos.id) desc, created_at desc")
+    @photo = Photo.verified.order("(select count(*) from likes where likes.photo_id = photos.id) desc, created_at desc").page(params[:page]).per(12)
   end
  
   def show 
@@ -23,10 +23,10 @@ class PhotosController < ApplicationController
   def create
     @photo = current_user.photos.build(photo_params)
     if @photo.save
-    @user_photos = current_user.photos.order('created_at DESC')
-    respond_to do |format|
-      format.js
-    end
+      @user_photos = current_user.photos.order('created_at DESC').page(params[:page]).per(9)
+      respond_to do |format|
+        format.js
+      end
     else
       flash[:danger] = @photo.errors.details[:name][0].values
         redirect_to current_user

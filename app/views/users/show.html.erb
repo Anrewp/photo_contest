@@ -19,8 +19,14 @@
   </div>
 
     <div class="profile-photos">
+      <div id="profile--photos-collection">
       <h4>Your Photos</h4>
       <%= render partial: 'user_photos',collection: @user_photos, locals: { user_photos: @user_photos} %>
+      </div>
+      
+       <div class="profile-pagination"> 
+         <%= paginate @user_photos %> 
+       </div>
     </div>
 
   </div>

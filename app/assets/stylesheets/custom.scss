@@ -33,10 +33,10 @@ header{
   color: #fff;
   opacity: 0.85;
   font-family: 'Corben', Georgia, Times, serif;
-  font-size:130px;
+  font-size:150px;
   text-shadow: 3px 2px 2px rgba(0,0,0,0.4);
   margin-top: -10px;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .alert {
@@ -598,6 +598,76 @@ border-radius: 50%;
 }
 .pgbody{
   padding-top:69px;
+}
+.pagination {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  margin-top: 30px;
+  width: 100%;
+  text-align: center;
+  font-size:19px;
+}
+
+.page a,
+.current{
+  /*background-color:white;*/
+  /*border-radius: 20%;*/
+  /*color:#2b2b2b;*/
+  padding: 1px 6px 1px 6px;
+  opacity:0.8;
+  text-decoration: none;
+  color:white;
+  font-weight: bold;
+  &:hover{
+    opacity:1;
+    text-shadow: 0px 0px 6px rgb(0, 213, 255);
+  }
+}
+.current{
+  font-size: 20px;
+  opacity: 0.9;
+  vertical-align: text-bottom;
+  text-shadow: 0px 0px 6px rgb(0, 213, 255);
+}
+.first a,
+.next a,
+.last a,
+.prev a{
+  font-size: 16px;
+  padding: 1px 6px 1px 6px;
+  opacity:0.8;
+  text-decoration: none;
+  color:white;
+  &:hover{
+    opacity:0.9;
+    text-shadow: 0px 0px 6px rgb(0, 213, 255);
+  }
+}
+.g-bottom{
+  margin-top: -40px;
+}
+.gap{
+color:white;
+}
+
+.profile-pagination .page a,
+.profile-pagination .first a,
+.profile-pagination .next a,
+.profile-pagination .last a,
+.profile-pagination .prev a,
+.profile-pagination .gap,
+.profile-pagination .current,{
+  color:black;
+  opacity: 0.5;
+  &:hover{
+    opacity:0.9;
+    text-shadow:none;
+  }
+}
+.profile-pagination .current{
+  opacity: 0.7;
+  text-shadow:none;
 }
 
 .navbar-inverse .navbar-nav .btn {
