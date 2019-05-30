@@ -16,11 +16,16 @@ AdminUser.create!(email:                 'admin@example.com',
 # 	         provider:  "vkontakte",
 # 	         image_url: "https://cdn1.vectorstock.com/i/1000x1000/98/45/cartoon-funny-monster-face-avatar-vector-16149845.jpg"
 # 	         )
+# User.create!(name:      "Example User2",
+# 	         email:     "exampleuser2@mail.ru",
+# 	         provider:  "vkontakte",
+# 	         image_url: "https://cdn1.vectorstock.com/i/1000x1000/98/45/cartoon-funny-monster-face-avatar-vector-16149845.jpg"
+# 	         )
 
-# 100.times do
+# 20.times do
 # u = Photo.create(
 # 	name: "Picture",
-# 	user_id: 2,
+# 	user_id: 1,
 # 	picture: Rails.root.join("app/assets/images/background.jpg").open,
 #     state: "verified"
 # 	)

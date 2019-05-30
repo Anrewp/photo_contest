@@ -5,8 +5,11 @@ class PhotosController < ApplicationController
   before_action :photo_verified?, only: :show
 
   def index
-    @photo = Photo.verified.order("(select count(*) from likes where likes.photo_id = photos.id) desc, created_at desc").page(params[:page]).per(12)
+    # @photo = Photo.verified.order("(select count(*) from likes where likes.photo_id = photos.id) desc, created_at desc").page(params[:page]).per(12)
+    @photo = PHOTO_LIKE_COUNT.leaders(params[:page].to_i || 1, with_member_data: true)
+    @paginate_array = Kaminari.paginate_array(@photo, total_count: PHOTO_LIKE_COUNT.total_members).page(params[:page]).per(12)
   end
+
  
   def show 
     @user = User.find(@photo.user_id)
@@ -45,6 +48,11 @@ class PhotosController < ApplicationController
   end
  
 private
+
+  def paginate
+    # pager = Kaminari.paginate_array(@photo, total_count: @lb.total_members)
+    # @page_array = pager.page(@page).per(@limit)
+  end
  
   def photo_params
     params.require(:photo).permit(:picture,:name)

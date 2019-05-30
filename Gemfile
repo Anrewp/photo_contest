@@ -30,6 +30,9 @@ gem 'mini_magick'
 gem 'activeadmin'
 gem 'devise'
 gem 'kaminari'
+gem 'redis'
+gem 'leaderboard'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password

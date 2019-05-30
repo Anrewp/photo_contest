@@ -1,23 +1,35 @@
-	<div class="thumbnail">
+<%
+   @photo2 = PHOTO_LIKE_COUNT.leaders(@page.to_i, with_member_data: true)
+   @photo2.each do |u|
+%>
 
-  <% pre_like = @photo.likes.find { |like| like.user_id == current_user.id  } if current_user %>
+<div class="col-lg-3 col-md-3 col-sm-4" id="photo<%= u[:member] %>" >
+<div class="thumbnail">
 
-  <%= link_to (image_tag(@photo.picture.url(:medium),class:'img-rounded',alt: 'Image') if @photo.picture?), @photo.picture.url, data: {
-  	lightbox: "example-set", 
+  <% 
+  pre_like = Like.where(user_id: current_user.id, photo_id:
+    u[:member]) if current_user
+  %>
 
-  	title: "#{@photo.name}" + 
+  <%= link_to (image_tag(JSON.parse(u[:member_data])['picture']['medium']['url'],class:'img-rounded',alt: 'Image')), JSON.parse(u[:member_data])['picture']['url'],
+    data: {
+    lightbox: "example-set", 
 
-  	"<div class='photo-like'>" + 
+    title: "#{JSON.parse(u[:member_data])['name']}" + 
 
-  	(link_to (image_tag('Thumbs_up2.svg',size: "35x35")), photo_likes_path(@photo), remote:true,id: 'like', method: :post if !pre_like && current_user ).to_s + 
+    "<div class='photo-like'>" + 
 
-  	(link_to (image_tag('Thumbs_up02.svg',size: "35x35")), photo_like_path(@photo, pre_like),remote:true,id: 'unlike', method: :delete if pre_like).to_s + 
+    (link_to (image_tag('Thumbs_up2.svg',size: "35x35")), photo_likes_path(u[:member], page: @page), remote:true,id: 'like', method: :post if pre_like.blank? && current_user ).to_s + 
+
+    (link_to (image_tag('Thumbs_up02.svg',size: "35x35")), photo_like_path(u[:member], pre_like.ids, page: @page),remote:true,id: 'unlike', method: :delete if !pre_like.blank?).to_s + 
 
       (image_tag('Thumbs_up2.svg',size: "35x35") if !current_user).to_s +
 
-    "<div class='photo-like-count'>" + (@photo.likes.count ).to_s + "</div>" +
+    "<div class='photo-like-count'>" + (u[:score].to_i ).to_s + "</div>" +
 
-  	(link_to (image_tag('comments02.svg',size: "40x40")), @photo).to_s + 
-  	"</div>"
+    (link_to (image_tag('comments02.svg',size: "40x40")), photo_path(u[:member])).to_s + 
+    "</div>"
   } %> 
   </div>
+  </div>
+   <% end %>

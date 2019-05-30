@@ -7,6 +7,9 @@ class Photo < ApplicationRecord
   validates      :name,       length: { maximum: 70 }
   validate       :picture_name
   validate       :picture_size
+  after_save     :update_leaderboard, if: :verified?
+  after_save     :remove_leaderboard_memeber, if: :rejected?
+  after_destroy  :remove_leaderboard_memeber
 
   scope :unmoderated, ->{ where(state: :unmoderated)}
   scope :published,   ->{ where(state: :verified)}
@@ -24,9 +27,16 @@ class Photo < ApplicationRecord
   	event :confirm do
     	transitions from: [:unmoderated,:rejected], to: :verified
   	end
-
   end
 
+  def update_leaderboard
+    PHOTO_LIKE_COUNT.rank_member(id.to_s, likes.count, { picture: picture, 
+                                                         name: name}.to_json)
+  end
+
+  def remove_leaderboard_memeber
+    PHOTO_LIKE_COUNT.remove_member(id.to_s)
+  end
 
 private
 

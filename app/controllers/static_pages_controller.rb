@@ -1,7 +1,8 @@
 class StaticPagesController < ApplicationController
   def home
   	if current_user
-  	  @photo = Photo.verified.order("(select count(*) from likes where likes.photo_id = photos.id) desc, created_at desc").page(params[:page]).per(12)
+  	  @photo = PHOTO_LIKE_COUNT.leaders(params[:page].to_i || 1, with_member_data: true)
+      @paginate_array = Kaminari.paginate_array(@photo, total_count: PHOTO_LIKE_COUNT.total_members).page(params[:page]).per(12)
   	end
   end
 

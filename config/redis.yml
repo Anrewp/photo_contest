@@ -1,0 +1,13 @@
+default: &default
+  url: redis://localhost:6379
+  db: 0
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
+  url: redis://redistogo:dc469c70cce77bdc0e2543b618e14234@hammerjaw.redistogo.com:9549/
