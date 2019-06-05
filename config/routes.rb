@@ -17,6 +17,11 @@ Rails.application.routes.draw do
 
    resources :photos do
     resources :likes
+    resources :comments
+  end
+
+  resources :comments do
+    resources :comments
   end
 
 

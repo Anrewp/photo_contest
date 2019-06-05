@@ -2,6 +2,7 @@ class Photo < ApplicationRecord
   include AASM
   belongs_to     :user
   has_many       :likes,      dependent: :destroy
+  has_many       :comments, as: :commentable, dependent: :destroy
   mount_uploader :picture,    PhotoUploader
   validates      :picture,    presence: true
   validates      :name,       length: { maximum: 70 }
@@ -30,8 +31,10 @@ class Photo < ApplicationRecord
   end
 
   def update_leaderboard
-    PHOTO_LIKE_COUNT.rank_member(id.to_s, likes.count, { picture: picture, 
-                                                         name: name}.to_json)
+    PHOTO_LIKE_COUNT.rank_member(id.to_s, likes.count, { url: picture.url, 
+                                                         medium_url: picture.medium.url,
+                                                         name: name,
+                                                          }.to_json)
   end
 
   def remove_leaderboard_memeber

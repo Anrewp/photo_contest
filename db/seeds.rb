@@ -25,7 +25,7 @@ AdminUser.create!(email:                 'admin@example.com',
 # 20.times do
 # u = Photo.create(
 # 	name: "Picture",
-# 	user_id: 1,
+# 	user_id: User.try(:first).id,
 # 	picture: Rails.root.join("app/assets/images/background.jpg").open,
 #     state: "verified"
 # 	)

@@ -27,7 +27,7 @@ $('#shine').hover(
   function(){$('#shine').css('display', 'none')}
 );
 });
-// Show photo info
+// Show photo info on user profile photo
 $(document).on({
     mouseenter: function(){
       $(this).parents(':eq(2)').find('.photo-info').css('display', 'block')
@@ -47,3 +47,14 @@ $(document).on({
     $(this).css('display', 'none')
     }
   }, '.photo-info');
+
+//Show Reply form on click
+function showForm(linkId){
+  var formId = "#new_comment" + linkId;
+  if($(formId).css("display") === "none"){
+
+  $(formId).css('display','block')
+  }
+  else { $(formId).css('display','none'); }
+};
+

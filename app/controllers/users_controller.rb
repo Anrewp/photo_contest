@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user_photos = current_user.photos.order('created_at DESC').page(params[:page]).per(9)
+    @user_photos = current_user.photos.order('created_at DESC').page(params[:page])
   end
 
  private

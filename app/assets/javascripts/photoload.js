@@ -1,3 +1,4 @@
+//image preview 
 function readURL(input) {
         if (input.files && input.files[0]) {
           var reader = new FileReader();
@@ -13,7 +14,7 @@ function readURL(input) {
         }
       }
 
-  
+  //For user upload form
  $(document).on('change','#photo_picture', function() { 
     if(this.files[0] != undefined){
     var size_in_megabytes = this.files[0].size/1024/1024;
