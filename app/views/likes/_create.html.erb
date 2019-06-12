@@ -1,4 +1,4 @@
 <% pre_like = @photo.likes.find { |like| like.user_id == current_user.id  } if current_user %>
 <%
-(link_to (image_tag('Thumbs_up02.svg',size: "35x35")), photo_like_path(@photo, pre_like, page: @page),remote:true, id: 'unlike', method: :delete).to_s + 
+(link_to (image_tag('Thumbs_up02.svg',size: "35x35")), photo_like_path(@photo, pre_like, page: "#{@paginate_array.current_page if @paginate_array}"), id: 'unlike').to_s + 
 %>

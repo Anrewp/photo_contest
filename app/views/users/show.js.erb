@@ -1,0 +1,2 @@
+$("#profile-photos-collection").html("<%= escape_javascript(render('users/photo_collection')) %>");
+$('#pagination').html("<%= escape_javascript(paginate(@user_photos, remote: true)) %>")

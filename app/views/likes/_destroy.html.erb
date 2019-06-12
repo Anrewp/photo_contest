@@ -1,3 +1,3 @@
 <%
-(link_to (image_tag('Thumbs_up2.svg',size: "35x35")), photo_likes_path(@photo, page: @page), remote:true,id: 'like', method: :post ).to_s +
+(link_to (image_tag('Thumbs_up2.svg',size: "35x35")), photo_likes_path(@photo, page: "#{@paginate_array.current_page if @paginate_array}"),id: 'like').to_s +
 %>

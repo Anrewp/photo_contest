@@ -1,2 +1,3 @@
 $("#profile-photos-collection").html("<%= escape_javascript(render('users/photo_collection')) %>");
 $("#new_photo").html("<%= j(render('users/form')) %>");
+$('#pagination').html("<%= escape_javascript(paginate(@user_photos,:params => {:controller => :users, :action => :show}, remote: true)) %>");

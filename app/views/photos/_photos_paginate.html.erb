@@ -1,6 +1,5 @@
 <%
-   @photo2 = PHOTO_LIKE_COUNT.leaders(@page.to_i, with_member_data: true)
-   @photo2.each do |u|
+   @paginate_array.each do |u|
 %>
 
 <div class="col-lg-3 col-md-3 col-sm-4" id="photo<%= u[:member] %>" >
@@ -18,10 +17,13 @@
     title: "#{JSON.parse(u[:member_data])['name']}" + 
 
     "<div class='photo-like'>" + 
+    "<div class='photo-like-thumbs'>" +
 
-    (link_to (image_tag('Thumbs_up2.svg',size: "35x35")), photo_likes_path(u[:member], page: @page), remote:true,id: 'like', method: :post if pre_like.blank? && current_user ).to_s + 
+    (link_to (image_tag('Thumbs_up2.svg',size: "35x35")), photo_likes_path(u[:member], page: params[:page]),id: 'like' if pre_like.blank? && current_user ).to_s + 
 
-    (link_to (image_tag('Thumbs_up02.svg',size: "35x35")), photo_like_path(u[:member], pre_like.ids, page: @page),remote:true,id: 'unlike', method: :delete if !pre_like.blank?).to_s + 
+    (link_to (image_tag('Thumbs_up02.svg',size: "35x35")), photo_like_path(u[:member], pre_like.ids, page: params[:page]),id: 'unlike' if !pre_like.blank?).to_s + 
+
+    "</div>" +
 
       (image_tag('Thumbs_up2.svg',size: "35x35") if !current_user).to_s +
 
@@ -32,4 +34,4 @@
   } %> 
   </div>
   </div>
-   <% end %>
+  <% end %>

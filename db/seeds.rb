@@ -6,7 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-
 AdminUser.create!(email:                 'admin@example.com', 
 	              password:              ENV['ADMIN_PASSWORD'], 
 	              password_confirmation: ENV['ADMIN_PASSWORD'])
@@ -22,7 +21,7 @@ AdminUser.create!(email:                 'admin@example.com',
 # 	         image_url: "https://cdn1.vectorstock.com/i/1000x1000/98/45/cartoon-funny-monster-face-avatar-vector-16149845.jpg"
 # 	         )
 
-# 20.times do
+# 12.times do
 # u = Photo.create(
 # 	name: "Picture",
 # 	user_id: User.try(:first).id,

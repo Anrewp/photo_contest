@@ -1,41 +1,10 @@
+<% provide(:search, "gallery") %>
 <h1>Gallery</h1>
 <div class="container jumbotron">
 <div class="photo-colletction">
 
-  <% @photos.each do |u| %>
-  
-    <div class="col-lg-3 col-md-3 col-sm-4" id="photo<%= u[:member] %>" >
-      <div class="thumbnail">
-
-  <% 
-    pre_like = Like.where(user_id: current_user.id, photo_id:
-    u[:member]) if current_user
-  %>
-
-  <%= link_to (image_tag(JSON.parse(u[:member_data])['medium_url'],class:'img-rounded',alt: 'Image')), JSON.parse(u[:member_data])['url'],
-    data: {
-  	lightbox: "example-set", 
-
-  	title: "#{JSON.parse(u[:member_data])['name']}" + 
-
-  	"<div class='photo-like'>" + 
-
-  	(link_to (image_tag('Thumbs_up2.svg',size: "35x35")), photo_likes_path(u[:member], page: params[:page]), remote:true,id: 'like', method: :post if pre_like.blank? && current_user ).to_s + 
-
-  	(link_to (image_tag('Thumbs_up02.svg',size: "35x35")), photo_like_path(u[:member], pre_like.ids, page: params[:page]),remote:true,id: 'unlike', method: :delete if !pre_like.blank?).to_s + 
-
-      (image_tag('Thumbs_up2.svg',size: "35x35") if !current_user).to_s +
-
-    "<div class='photo-like-count'>" + (u[:score].to_i ).to_s + "</div>" +
-
-  	(link_to (image_tag('comments02.svg',size: "40x40")), photo_path(u[:member])).to_s + 
-  	"</div>"
-             } 
-  %> 
-     </div>
-  </div>
-   <% end %>
+  <%= render 'photos_paginate' %>
 
 </div>
-  <%= paginate @paginate_array %>
+  <span id="pagination"> <%= paginate @paginate_array, remote: true %> </span>
 </div>

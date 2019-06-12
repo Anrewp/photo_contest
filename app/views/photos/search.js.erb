@@ -1,0 +1,2 @@
+$(".photo-colletction").html("<%= escape_javascript(render('photos/photos_paginate')) %>");
+$('#pagination').html("<%= escape_javascript(paginate(@paginate_array,:params => {:controller => :photos, :action => :search}, remote: true)) %>");

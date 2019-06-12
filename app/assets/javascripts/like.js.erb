@@ -1,0 +1,18 @@
+$(document).on('click', '#like, #unlike' , function(e) {
+        e.preventDefault();
+        var photoPath = this.pathname;
+        var currentPage = +($('.page.current').text());
+        var methodForRequest = 'POST'
+        if(currentPage === 0){ currentPage = 1 };
+        if(this.id != "like"){ methodForRequest = 'DELETE' };
+     // execute ajax
+        $.ajax({
+            url: photoPath,
+            method: methodForRequest,
+            beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+            success: function() {
+             $('#page').val(currentPage.toString());
+             $('#glyphicon').click();
+            }
+        });
+});

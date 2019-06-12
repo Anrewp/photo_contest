@@ -6,11 +6,7 @@ class LikesController < ApplicationController
    if liked?
      flash.now[:danger] = "You can't like more than once"
    else
-     @page = params[:page]
      @photo.likes.create(user_id: current_user.id)
-     respond_to do |format|
-       format.js
-     end
    end
   end
 
@@ -18,11 +14,7 @@ class LikesController < ApplicationController
     if !liked?
       flash.now[:notice] = "Cannot unlike"
     else
-      @page = params[:page]
       @like.destroy
-      respond_to do |format|
-        format.js
-      end
     end
   end
 

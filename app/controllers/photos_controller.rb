@@ -3,9 +3,10 @@ class PhotosController < ApplicationController
   before_action :set_photo,       only: [:show, :destroy, :edit, :update]
   before_action :user_photo?,     only: [:edit, :update, :destroy]
   before_action :photo_verified?, only: :show
+  # protect_from_forgery except: :search
 
   def index
-    # @photo = Photo.verified.order("(select count(*) from likes where likes.photo_id = photos.id) desc, created_at desc").page(params[:page]).per(12)
+    # @photo = Photo.verified.order("(select count(*) from likes where likes.photo_id = photos.id) desc, created_at desc").page(params[:page])
     @photos = PHOTO_LIKE_COUNT.leaders(params[:page].to_i || 1, with_member_data: true)
     @paginate_array = Kaminari.paginate_array(@photos, total_count: PHOTO_LIKE_COUNT.total_members).page(params[:page])
   end
@@ -46,9 +47,23 @@ class PhotosController < ApplicationController
        render :edit
      end
   end
+
+  def search
+    @photos = PHOTO_LIKE_COUNT.all_leaders(with_member_data: true)
+    
+    @photos.reverse! if params[:reverse] == "true"
+
+    @photos.select! do |photo|
+      JSON.parse(photo[:member_data])['name'].downcase.include?(params[:search].downcase)
+    end
+    @paginate_array = Kaminari.paginate_array(@photos, total_count: @photos.length).page(params[:page])
+    respond_to do |format|
+      format.js
+    end
+  end
  
 private
- 
+
   def photo_params
     params.require(:photo).permit(:picture,:name)
   end

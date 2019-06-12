@@ -32,10 +32,19 @@
         <li><div><%=image_tag ('shine.png'),size: '50x50' %></div>
           <%= link_to "Gallery", photos_path if !current_user %>
         </li>
-        <li><div><%=image_tag ('shine.png'),size: '50x50' %></div>
-          <!-- link_to "Rating",  rating_path  -->
+
+        <li> 
         </li>
       </ul>
+      <div class="mx-auto order-0  " id="search-form">
+           <%= form_tag(search_path, :method => "get", class: "search #{yield(:search)}", id: "search",remote: true) do %>  
+           <%= search_field_tag :search, params[:search], placeholder: "Search", class: "form-control" %> 
+           <%= hidden_field_tag 'reverse', false , id: "reverse-value"%> 
+           <%= hidden_field_tag 'page', "#{@paginate_array.current_page if @paginate_array}" %>
+           <%= button_tag "", class:'btn btn-info glyphicon glyphicon-search',name: nil, id:"glyphicon"%>  
+           <button class='reverse' onclick='reverseLeaders()' id="btn-reverse" ></button>
+          <% end %>
+        </div>
     </nav>
   </div>
 </header>

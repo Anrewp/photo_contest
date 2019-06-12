@@ -25,7 +25,7 @@
       </div>
       
        <div class="profile-pagination"> 
-         <%= paginate @user_photos %> 
+       <span id="pagination"> <%= paginate @user_photos, remote: true %> </span>
        </div>
     </div>
 
