@@ -17,7 +17,8 @@ module PhotoContest
         ENV[key.to_s] = value
       end if File.exists?(env_file)
     end
-
+    
+    config.autoload_paths += Dir.glob("#{config.root}/app/interactions/*")
     config.action_view.embed_authenticity_token_in_remote_forms = true
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

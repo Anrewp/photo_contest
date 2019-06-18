@@ -1,35 +1,16 @@
 class LikesController < ApplicationController
-  before_action :find_photo
-  before_action :find_like, only: [:destroy]
-  
+
   def create
-   if liked?
-     flash.now[:danger] = "You can't like more than once"
-   else
-     @photo.likes.create(user_id: current_user.id)
-   end
+    @photo = find_photo!(params)
+    inputs = { photo: @photo, user_id: current_user.id }
+               .reverse_merge(params)
+    CreateLike.run!(inputs)
   end
 
   def destroy
-    if !liked?
-      flash.now[:notice] = "Cannot unlike"
-    else
-      @like.destroy
-    end
-  end
-
-  private
-
-  def liked?
-    Like.where(user_id: current_user.id, photo_id:
-    params[:photo_id]).exists?
-  end
-
-  def find_photo
-    @photo = Photo.find(params[:photo_id])
-  end
-
-  def find_like
-   @like = @photo.likes.find(params[:id])
+    @photo = find_photo!(params)
+    inputs = { like: FindLike.run!(params), user_id: current_user.id }
+               .reverse_merge(params)
+    DestroyLike.run!(inputs)
   end
 end

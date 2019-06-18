@@ -1,9 +1,7 @@
 class StaticPagesController < ApplicationController
   def home
-  	if current_user
-  	  @photos = PHOTO_LIKE_COUNT.leaders(params[:page].to_i || 1, with_member_data: true)
-      @paginate_array = Kaminari.paginate_array(@photos, total_count: PHOTO_LIKE_COUNT.total_members).page(params[:page])
-  	end
+    @paginate_array = ListPhotosHome.run!(page: params[:page])
+                        .page(params[:page])
   end
 
   def index; end

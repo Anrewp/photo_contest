@@ -1,15 +1,15 @@
 class SessionsController < ApplicationController
 
   def create
-     # render plain: request.env['omniauth.auth'].to_yaml
-    begin
-      user = User.from_omniauth(request.env['omniauth.auth'])
-      session[:user_id] = user.id
-      flash[:success] = "Welcome, #{user.name}!"
-    rescue
+    outcome = CreateUserSession.run(auth: request.env['omniauth.auth'].to_json)
+    if outcome.valid?
+      session[:user_id] = outcome.result.id
+      flash[:success] = "Welcome, #{outcome.result.name}!"
+      redirect_to user_path(outcome.result)
+    else
       flash[:warning] = "There was an error while trying to authenticate you..."
+      redirect_to root_path
     end
-    redirect_to user_path(user.id)
   end
 
   def destroy

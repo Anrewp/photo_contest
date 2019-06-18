@@ -1,34 +1,34 @@
 class UsersController < ApplicationController
-  before_action :current_user?, only: [:show, :edit]
 
   def edit
-    @user = User.find(current_user.id)
+    @user = find_user!
+  end
+  
+  def show
+    @user_photos = ListUserPhotos.run!(user: current_user)
+                     .page(params[:page]) 
   end
 
   def update
-  	@user = User.find(current_user.id)
-  	@user.name      = params[:user][:name]
-  	@user.image_url = params[:user][:image_url]
-  	if @user.save
-  		flash[:success] = "User Updeated successfully!"
-  		redirect_to @user
-  	else
-  		flash.now[:danger] = "Something whent wrong!"
-  		render :edit
-  	end
+    inputs = { user: find_user! }.reverse_merge(params[:user])
+    outcome = UpdateUser.run(inputs)
+    if outcome.valid?
+      flash[:success] = "User Updeated successfully!"
+      redirect_to(outcome.result)
+    else
+      @user = outcome.user
+      render 'edit'
+    end
   end
 
-  def show
-    @user_photos = current_user.photos.order('created_at DESC').page(params[:page])
-  end
+private
 
- private
-
-  def user_params
-    params.require(:user).permit(:name, :image_url)
-  end
-
-  def current_user?
-   redirect_to root_path if !current_user
+  def find_user!
+    outcome = FindUser.run(id: current_user.id)
+    if outcome.valid?
+      outcome.result
+    else
+      fail ActiveRecord::RecordNotFound, outcome.errors.full_messages.to_sentence
+    end
   end
 end

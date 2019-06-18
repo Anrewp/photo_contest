@@ -1,6 +1,6 @@
 <%= form_for [@photo, Comment.new],html: {id:"new_comment" + "0" }, remote:true do |f| %>
-	  <%= f.hidden_field :id, value: "#{@photo.id}" %>
+	  <%= f.hidden_field :photo_id, value: "#{@photo.id}" %>
 	  <%= f.hidden_field :user_id, value: current_user.id %>
       <%= f.text_area :content, placeholder: "Comment Photo" %><br/>
-      <%= f.submit "Comment", class: "btn btn-m btn-default replay-button"   %>
+      <%= f.submit "Comment", class: "btn btn-m btn-default replay-button", id: 'submit-comment'   %>
       <% end %>
