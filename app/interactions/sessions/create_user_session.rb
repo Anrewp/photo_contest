@@ -9,8 +9,9 @@ class CreateUserSession < ActiveInteraction::Base
     user = User.find_or_create_by(email:    hash['info']['email'],
                                   provider: hash['provider'])
     if user.name.blank?
-      user.name      = hash['info']['nickname'] || hash['info']['name']
-      user.image_url = hash['info']['image_url']
+      name = hash['info']['nickname'] == '' ? hash['info']['name'] : hash['info']['nickname']
+      user.name      = name
+      user.image_url = hash['info']['image']
       user.token     = hash['credentials']['token']
     end
 
