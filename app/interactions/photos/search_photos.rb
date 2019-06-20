@@ -1,6 +1,6 @@
 class SearchPhotos < ActiveInteraction::Base
-  string :search
-  string :reverse
+  string :search, :reverse,
+    default: ""
 
   def execute
     photos = PHOTO_LIKE_COUNT.all_leaders(with_member_data: true)

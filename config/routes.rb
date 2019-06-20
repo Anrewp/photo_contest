@@ -9,8 +9,6 @@ Rails.application.routes.draw do
   delete  '/logout',                   to: 'sessions#destroy'
   get     '/index',                    to: 'static_pages#index'
   get     '/photos/index',             to: 'photos#index'
-  get     '/rating',                   to: 'static_pages#rating'
-  get     '/search',                   to: 'photos#search'
   get     '/u_paginate',               to: 'users#show'
   
   resources :users do

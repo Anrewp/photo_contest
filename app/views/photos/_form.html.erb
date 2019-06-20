@@ -1,5 +1,0 @@
-<%= form_tag(search_path, :method => "get", class: "search #{yield(:search)}",remote: true) do %>  
-<%= search_field_tag :search, params[:search], placeholder: "Search", class: "form-control" %>  
-<%= hidden_field_tag 'page', "#{@paginate_array.current_page}" %>
-<%= button_tag "", class:'btn btn-info glyphicon glyphicon-search',name: nil%>  
-<% end %>

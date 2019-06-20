@@ -1,27 +1,35 @@
 class PhotosController < ApplicationController
-  before_action :set_photo, only: [:show, :destroy, :edit, :update]
+  before_action :set_photo, except: [:index, :create]
 
   def index
-    @paginate_array = ListPhotos.run!(params).page(params[:page])
+    @paginate_array = SearchPhotos.run!(params).page(params[:page])
   end
  
   def show 
-    @user = FindUserByPhotoId.run!(params) if photo_verified?(@photo)
+    if photo_verified?(@photo)
+      @user = User.find(@photo.user_id)
+    else redirect_to root_path
+    end
   end
 
   def edit
-    user_photo?(@photo)
+    unless user_photo?(@photo)
+      redirect_to root_path 
+    end
   end
 
   def destroy
-    DestroyPhoto.run!(photo: @photo) if user_photo?(@photo)
+    if user_photo?(@photo)
+      DestroyPhoto.run!(photo: @photo) 
+    else redirect_to root_path
+    end
   end
 
   def create
     inputs = { user_id: current_user.id }.reverse_merge(params[:photo])
     outcome = CreatePhoto.run(inputs)
     if outcome.valid?
-      @user_photos = ListUserPhotos.run!(user: current_user)
+      @user_photos = current_user.photos.order('created_at DESC')
                      .page(params[:page])
     else
       flash[:danger] = outcome.errors.full_messages.to_sentence
@@ -41,13 +49,9 @@ class PhotosController < ApplicationController
     end
   end
 
-  def search
-    @paginate_array = SearchPhotos.run!(params).page(params[:page])
-  end
-
 private
 
   def set_photo
-    @photo = find_photo!(params)
+    @photo = Photo.find_by_id(params[:id])
   end
 end

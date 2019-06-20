@@ -1,15 +1,15 @@
 class CommentsController < ApplicationController
   
   def create
-    inputs = { comment_id: params[:comment_id],
-               photo_id:   params[:photo_id] }
-               .reverse_merge(params[:comment])
+    params.permit!
+    inputs = params[:comment].reverse_merge(params)
     CreateComment.run!(inputs)
-    @photo = find_photo!(params[:comment])
+    @photo = Photo.find(inputs[:photo_id])
   end
 
   def destroy
-    DestroyComment.run!(comment: FindComment.run!(params))
-    @photo = find_photo!(params)
+    comment = Comment.find_by_id(params[:id])
+    comment.destroy
+    @photo = Photo.find(params[:photo_id])
   end
 end

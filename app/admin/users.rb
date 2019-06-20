@@ -50,6 +50,14 @@ controller do
     end
   end
 
+  def destroy
+    user = User.find(params[:id])
+    user.photos.each do |photo|
+      photo.reject!
+    end
+    redirect_to admin_users_path if user.destroy
+  end
+  
 private
 
   def user_params

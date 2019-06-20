@@ -32,21 +32,3 @@ private
     end
   end
 end
-
-# validates      :picture,    presence: true
-#   validates      :name,       length: { maximum: 70 }
-#   validate       :picture_name
-#   validate       :picture_size
-# private
-
-#   def picture_size
-#     if picture.size > 5.megabytes
-#       errors.add(:picture, "Photo should be less than 5MB")
-#     end
-#   end
-
-#   def picture_name
-#     if name.blank?
-#       errors.add(:name, "Photo title can't be blank!")
-#     end
-#   end
