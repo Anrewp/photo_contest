@@ -30,7 +30,18 @@
     "<div class='photo-like-count'>" + (u[:score].to_i ).to_s + "</div>" +
 
     (link_to (image_tag('comments02.svg',size: "40x40")), photo_path(u[:member])).to_s + 
-    "</div>"
+
+    "<div class='social-share-white'>" +
+
+     (social_share_button_tag(JSON.parse(u[:member_data])['name'], 
+      image: "#{ JSON.parse(u[:member_data])['url'] }",
+      url: "#{request.base_url}" + "/photos/" + "#{u[:member]}"
+      )).to_s + 
+
+     "</div>" +
+
+    "</div>"  
+
   } %> 
   </div>
   </div>

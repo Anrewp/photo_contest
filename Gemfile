@@ -33,6 +33,7 @@ gem 'kaminari'
 gem 'redis'
 gem 'leaderboard'
 gem 'active_interaction'
+gem 'social-share-button'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'

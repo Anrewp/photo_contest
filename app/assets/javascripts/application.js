@@ -16,4 +16,5 @@
 //= require activestorage
 //= require turbolinks
 //= require lightBox
+//= require social-share-button
 //= require_tree .
