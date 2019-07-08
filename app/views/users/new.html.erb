@@ -1,23 +1,19 @@
 <% provide(:title, 'Sign up') %>
 <% provide(:class, 'signup') %>
-<div class="container">
-<h1>Sign up</h1>
-<p>This will be a signup page for new Users.</p>
+<span><h1>LogIn</h1></span>
 <div id="container">
   <% if current_user %>
-    <ul class="nav navbar-nav pull-left">
-      <li><%= image_tag current_user.image_url, alt: current_user.name, size: '50x50' %></li>
+    <ul class="signup-icon">
+      <li><%= image_tag current_user.image_url, alt: current_user.name, size: '25x25' %></li>
       <li><%= link_to 'Log Out', logout_path, method: :delete %></li>
     </ul>
   <% else %>
-    <ul class="nav navbar-nav">
-      <div>
-        <%= link_to image_tag("VK.com-logo.svg", id: "logo"),
-                              '/auth/vkontakte' %>
-      </div>
-        <%= link_to image_tag("github-sign.svg", id: "logo"),
-                            '/auth/github' %>
-    </ul>
+    <div class="signup-icon">
+      <div> <%= link_to image_tag("VK.com-logo.svg"),
+                              '/auth/vkontakte' %> </div>
+      <span></span>
+      <div> <%= link_to image_tag("github-sign.svg"),
+                            '/auth/github' %> </div>
+    </div>
   <% end %>
-</div>
 </div>

@@ -29,6 +29,11 @@ GEM
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
     active_interaction (3.7.1)
       activemodel (>= 4, < 7)
+    active_model_serializers (0.10.9)
+      actionpack (>= 4.1, < 6)
+      activemodel (>= 4.1, < 6)
+      case_transform (>= 0.2)
+      jsonapi-renderer (>= 0.1.1.beta1, < 0.3)
     activeadmin (1.4.3)
       arbre (>= 1.1.1)
       coffee-rails
@@ -89,6 +94,8 @@ GEM
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
+    case_transform (0.2)
+      activesupport
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
     chromedriver-helper (2.1.0)
@@ -322,6 +329,7 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (2.2.0)
+    jsonapi-renderer (0.2.2)
     jwt (2.1.0)
     kaminari (1.1.1)
       activesupport (>= 4.1.0)
@@ -523,6 +531,7 @@ PLATFORMS
 DEPENDENCIES
   aasm
   active_interaction
+  active_model_serializers
   activeadmin
   bootsnap (>= 1.1.0)
   bootstrap-sass (>= 3.3.7)
@@ -535,6 +544,7 @@ DEPENDENCIES
   fog
   jbuilder (~> 2.5)
   jquery-rails
+  jwt
   kaminari
   leaderboard
   listen (>= 3.0.5, < 3.2)

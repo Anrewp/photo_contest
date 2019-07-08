@@ -24,5 +24,13 @@ Rails.application.routes.draw do
     resources :comments
   end
 
+  namespace 'api' do
+    namespace 'v1' do
+      get '/user_info',      to: 'users#user_info'
+      get '/user_photo/:id', to: 'users#user_photo'
+      get '/user_photos',    to: 'users#user_photos'
+      get '/photos',         to: 'photos#index'
+    end
+  end
 
 end

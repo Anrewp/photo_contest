@@ -17,6 +17,15 @@ module PhotoContest
         ENV[key.to_s] = value
       end if File.exists?(env_file)
     end
+
+    # config.action_dispatch.default_headers = 
+    #   {
+    #     'Authorization' => "" # without value
+    #     # 'Custom-Header2' => "with value"
+    #   }
+    
+    # config.autoload_paths += %W( #{config.root}/lib )
+    # config.autoload_paths << Rails.root.join('lib')
     
     config.autoload_paths += Dir.glob("#{config.root}/app/interactions/*")
     config.action_view.embed_authenticity_token_in_remote_forms = true

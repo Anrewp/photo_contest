@@ -18,9 +18,33 @@ body {
   height: 100%;
   background: #DFEAEA;
   background-image:url('background2-c97af80ec6fc1043c542d13f175e27c72a4230852c47c8599faa05130d5b54a0.jpg');
-  background-attachment: fixed
+  background-attachment: fixed;
+  background-size: cover;
 }
-
+.signup-icon{
+  display: block;
+  width: 100%;
+  margin-top:70px;
+  text-align:center;
+}
+.signup-icon div{
+  display: inline-block;
+  opacity: 0.8;
+  margin-right: auto;
+  margin-left: auto;
+  width: fit-content;
+  &:hover{
+    opacity:1;
+  }
+}
+.signup-icon img{
+ height: 85px;
+ width:85px;
+ margin-bottom: 5px;
+}
+.signup-icon span{
+  margin-right: 20px;
+}
 
 header{
   box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.2);
