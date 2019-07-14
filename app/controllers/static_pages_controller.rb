@@ -1,6 +1,6 @@
 class StaticPagesController < ApplicationController
   def home
-    @paginate_array = ListPhotosHome.run!(page: params[:page])
+    @paginate_array = ListPhotosHome.run(page: params[:page]).result
                         .page(params[:page])
   end
 

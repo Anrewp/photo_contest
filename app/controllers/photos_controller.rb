@@ -2,7 +2,7 @@ class PhotosController < ApplicationController
   before_action :set_photo, except: [:index, :create]
 
   def index
-    @paginate_array = SearchPhotos.run!(params).page(params[:page])
+    @paginate_array = SearchPhotos.run(params).result.page(params[:page])
   end
  
   def show 
@@ -20,7 +20,7 @@ class PhotosController < ApplicationController
 
   def destroy
     if user_photo?(@photo)
-      DestroyPhoto.run!(photo: @photo) 
+      DestroyPhoto.run(photo: @photo) 
     else redirect_to root_path
     end
   end

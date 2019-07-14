@@ -4,14 +4,14 @@ class LikesController < ApplicationController
   def create
     inputs = { photo: @photo, user_id: current_user.id }
                .reverse_merge(params)
-    CreateLike.run!(inputs)
+    CreateLike.run(inputs).result
   end
 
   def destroy
     inputs = { like: @photo.likes.find(params[:id]),
                user_id: current_user.id }
                .reverse_merge(params)
-    DestroyLike.run!(inputs)
+    DestroyLike.run(inputs).result
   end
 
 private

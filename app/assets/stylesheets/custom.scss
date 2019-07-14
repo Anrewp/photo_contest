@@ -355,8 +355,8 @@ margin-bottom: 5px;
   padding-left: 10px;
   /*border-radius: 5px;*/
   /*border-color: #46b8da;*/
-  -webkit-mask: url('reverse-bb51b3c8d83c0521163a41779ab84ab75a5b31045bf9095d3a51a037dc22846f.svg')no-repeat 50% 50%;
   mask:url('transfer2.svg')no-repeat 50% 50%;
+  -webkit-mask: url('reverse-bb51b3c8d83c0521163a41779ab84ab75a5b31045bf9095d3a51a037dc22846f.svg')no-repeat 50% 50%;
   /*background-size: 20px;*/
   /*background-repeat: no-repeat;*/
   /*background-position: center;*/
@@ -530,15 +530,62 @@ margin-bottom: 5px;
   justify-content: space-between;
 }
 
+#token{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  transition: 0.3s ease-in-out;
+  font-weight: bold;
+  /*background-color: #e4e4e4;
+  border-color: #f5f5f5;
+  color: #847f77;*/
+  background-color: #b5b5b5;
+  border-color: #e2e2e2;
+  color: #757068;
+  &:hover{
+   width: 80px;
+   height: 30px;
+   border-radius: 5px;
+   font-weight: normal;
+   transition: 0.3s ease-in-out;
+  }
+  &:focus,
+  &:hover,
+  &:active,
+  &:active:hover,
+  &:target,
+  &:focus-within{
+    outline: none;
+  }
+}
+
+#credentials-token{
+ display: none;
+ width: 360px;
+ overflow: hidden;
+}
+#p.hide{
+  opacity: 0;
+  font-size:1px;
+}
+
+#p{
+  display: inline-block;
+  padding-top:3px;
+  font-size:12px;
+  opacity: 1; 
+  /*transition: all 0.9s ease-in-out;*/
+ }
+
 a.btn.btn-m.btn-default {
     height: 33px;
     width: 90px;
     text-align: center;
     padding-top: 6px;
-    background-color: darkgray;
-    border: 1px solid gray;
+    background-color: #b7b7b7;
+    border: 1px solid #a7a7a7;
     &:hover{
-      background-color:gray;
+      background-color:#ACACAC;
     }
 }
 
@@ -590,12 +637,18 @@ min-width: 700px;
 }
 .jum-edit{
   width: fit-content;
+  width:-webkit-fit-content;
+  width:-moz-fit-content;
+  width:-ms-fit-content;
   margin-left:auto;
   margin-right: auto;
   padding-top: 5px;
 }
 .edit-show{
   width: fit-content;
+  width:-webkit-fit-content;
+  width:-moz-fit-content;
+  width:-ms-fit-content;
   min-width:0;
   padding:10px;
 }

@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   def create
     params.permit!
     inputs = params[:comment].reverse_merge(params)
-    CreateComment.run!(inputs)
+    CreateComment.run(inputs).result
     @photo = Photo.find(inputs[:photo_id])
   end
 

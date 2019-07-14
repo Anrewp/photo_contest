@@ -9,6 +9,8 @@
         <li><strong>Provider:</strong> <%= current_user.provider %></li>
         <li><strong>Name:</strong> <%= current_user.name %></li>
         <li><strong>email:</strong> <%= current_user.email %></li>
+        <li id="token-li"><button id="token" onclick="getUserToken()"><p id="p">T</p></button></li>
+        <li id="credentials-token"><strong>Token:</strong></li>
 
         <div class="profile-info-btn">
           <%= link_to 'Settings', edit_user_path(current_user.id),class: 'btn btn-m btn-default' %>

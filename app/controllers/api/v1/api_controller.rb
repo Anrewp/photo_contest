@@ -8,12 +8,12 @@ private
   end
 
   def authorize_request
-    # header = request.headers['Authorization']
-    # header = header.split(' ').last if header
-    jwt = cookies.signed[:jwt]
+    header = request.headers['Authorization']
+    header = header.split(' ').last if header
+    # jwt = cookies.signed[:jwt]
     begin
-      # @decoded = JsonWebToken.decode(header)
-      @decoded = JsonWebToken.decode(jwt)
+      # @decoded = JsonWebToken.decode(jwt)
+      @decoded = JsonWebToken.decode(header)
       @current_user = User.find(@decoded[:user_id])
     rescue ActiveRecord::RecordNotFound => e
       render json: { errors: e.message }, status: :unauthorized

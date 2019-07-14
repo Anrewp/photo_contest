@@ -26,10 +26,11 @@ Rails.application.routes.draw do
 
   namespace 'api' do
     namespace 'v1' do
-      get '/user_info',      to: 'users#user_info'
-      get '/user_photo/:id', to: 'users#user_photo'
-      get '/user_photos',    to: 'users#user_photos'
-      get '/photos',         to: 'photos#index'
+      get '/users/:id/info',            to: 'users#user_info'
+      get '/users/:id/photo/:photo_id', to: 'users#user_photo'
+      get '/users/:id/photos',          to: 'users#user_photos'
+      get '/user_token',                to: 'users#user_token'
+      get '/photos',                    to: 'photos#index'
     end
   end
 
