@@ -1,6 +1,6 @@
 function getUserToken() {
         $.ajax({
-            url: '/api/v1/user_token',
+            url: '/api/v1/users/user_token',
             method: 'GET',
             dataType: 'json',
             beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},

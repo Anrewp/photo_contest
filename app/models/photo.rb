@@ -1,4 +1,5 @@
 class Photo < ApplicationRecord
+  require 'sidekiq/api'
   include AASM
   mount_uploader :picture, PhotoUploader
   belongs_to     :user
@@ -16,11 +17,11 @@ class Photo < ApplicationRecord
   	state :rejected
   	state :verified
 
-  	event :reject, after: :remove_leaderboard_memeber do
+  	event :reject, after: [:remove_leaderboard_memeber, :destroy_photo] do
     	transitions from: [:unmoderated,:verified], to: :rejected
   	end
 
-  	event :confirm, after: :update_leaderboard do
+  	event :confirm, after: [:update_leaderboard, :cencel_destroy] do
     	transitions from: [:unmoderated,:rejected], to: :verified
   	end
   end
@@ -34,5 +35,16 @@ private
 
   def remove_leaderboard_memeber
     PHOTO_LIKE_COUNT.remove_member(id.to_s)
+  end
+
+  def destroy_photo
+    PhotoDeleteWorker.perform_at(1.minutes.from_now, id)
+  end
+
+  def cencel_destroy
+    queue = Sidekiq::ScheduledSet.new
+    queue.each do |job|
+      job.delete if job.args[0].equal?(id)
+    end
   end
 end

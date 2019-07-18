@@ -36,6 +36,7 @@ gem 'active_interaction'
 gem 'social-share-button'
 gem 'active_model_serializers'
 gem 'jwt'
+gem 'sidekiq'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'

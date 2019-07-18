@@ -63,7 +63,6 @@ index do
     item "Publish", publish_admin_photo_path(photo.id), style: 'color: #B2E8B3;',class: "button", method: :put if photo.unmoderated? || photo.rejected?
     item "Reject", reject_admin_photo_path(photo.id), style: 'color: #F8B5B5;',class: "button", method: :put if photo.unmoderated? || photo.verified?
     item "Edit", edit_admin_photo_path(photo.id),class: "button"
-    item "Delete", admin_photo_path(photo.id),style: 'color: #FF8686;',class: "button", method: :delete,data: { confirm: "You sure?" }
   end
     
 end

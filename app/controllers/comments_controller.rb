@@ -3,8 +3,13 @@ class CommentsController < ApplicationController
   def create
     params.permit!
     inputs = params[:comment].reverse_merge(params)
-    CreateComment.run(inputs).result
-    @photo = Photo.find(inputs[:photo_id])
+    outcome = CreateComment.run(inputs)
+    if outcome.valid?
+      @photo = Photo.find(inputs[:photo_id])
+    else
+      flash[:danger] = outcome.errors.full_messages.to_sentence
+      redirect_to root_path
+    end
   end
 
   def destroy

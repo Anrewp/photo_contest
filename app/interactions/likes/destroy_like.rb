@@ -13,6 +13,8 @@ class DestroyLike < ActiveInteraction::Base
                                     medium_url: photo.picture.medium.url,
                                     name:       photo.name }.to_json) 
        end
+     else
+      errors.add(:base, message: "Something went wrong!")
      end
    end
   end
