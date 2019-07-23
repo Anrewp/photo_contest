@@ -1,41 +1,41 @@
 <%
-   @paginate_array.each do |u|
+   @paginate_array.each do |photo|
 %>
 
-<div class="col-lg-3 col-md-3 col-sm-4" id="photo<%= u[:member] %>" >
+<div class="col-lg-3 col-md-3 col-sm-4" id="photo<%= photo[:member] %>" >
 <div class="thumbnail">
 
   <% 
   pre_like = Like.where(user_id: current_user.id, photo_id:
-    u[:member]) if current_user
+    photo[:member]) if current_user
   %>
 
-  <%= link_to (image_tag(JSON.parse(u[:member_data])['medium_url'],class:'img-rounded',alt: 'Image')), JSON.parse(u[:member_data])['url'],
+  <%= link_to (image_tag(JSON.parse(photo[:member_data])['medium_url'],class:'img-rounded',alt: 'Image')), JSON.parse(photo[:member_data])['url'],
     data: {
     lightbox: "example-set", 
 
-    title: "#{JSON.parse(u[:member_data])['name']}" + 
+    title: "#{JSON.parse(photo[:member_data])['name']}" + 
 
     "<div class='photo-like'>" + 
     "<div class='photo-like-thumbs'>" +
 
-    (link_to (image_tag('Thumbs_up2.svg',size: "35x35")), photo_likes_path(u[:member], page: params[:page]),id: 'like' if pre_like.blank? && current_user ).to_s + 
+    (link_to (image_tag('Thumbs_up2.svg',size: "35x35")), photo_likes_path(photo[:member], page: params[:page]),id: 'like' if pre_like.blank? && current_user ).to_s + 
 
-    (link_to (image_tag('Thumbs_up02.svg',size: "35x35")), photo_like_path(u[:member], pre_like.ids, page: params[:page]),id: 'unlike' if !pre_like.blank?).to_s + 
+    (link_to (image_tag('Thumbs_up02.svg',size: "35x35")), photo_like_path(photo[:member], pre_like.ids, page: params[:page]),id: 'unlike' if !pre_like.blank?).to_s + 
 
     "</div>" +
 
       (image_tag('Thumbs_up2.svg',size: "35x35") if !current_user).to_s +
 
-    "<div class='photo-like-count'>" + (u[:score].to_i ).to_s + "</div>" +
+    "<div class='photo-like-count'>" + (photo[:score].to_i ).to_s + "</div>" +
 
-    (link_to (image_tag('comments02.svg',size: "40x40")), photo_path(u[:member])).to_s + 
+    (link_to (image_tag('comments02.svg',size: "40x40")), photo_path(photo[:member])).to_s + 
 
     "<div class='social-share-white'>" +
 
-     (social_share_button_tag(JSON.parse(u[:member_data])['name'], 
-      image: "#{ JSON.parse(u[:member_data])['url'] }",
-      url: "#{request.base_url}" + "/photos/" + "#{u[:member]}"
+     (social_share_button_tag(JSON.parse(photo[:member_data])['name'], 
+      image: "#{ JSON.parse(photo[:member_data])['url'] }",
+      url: "#{request.base_url}" + "/photos/" + "#{photo[:member]}"
       )).to_s + 
 
      "</div>" +

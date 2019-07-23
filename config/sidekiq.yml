@@ -1,0 +1,4 @@
+:schedule:
+  photo_delete:
+    every: 2h   
+    class: PhotoDeleteWorker
