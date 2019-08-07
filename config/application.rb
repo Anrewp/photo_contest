@@ -23,7 +23,14 @@ module PhotoContest
     #     'Authorization' => "" # without value
     #     # 'Custom-Header2' => "with value"
     #   }
-    
+
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', headers: :any, methods: [:get, :post, :options]
+      end
+    end
+
     # config.autoload_paths += %W( #{config.root}/lib )
     # config.autoload_paths << Rails.root.join('lib')
     

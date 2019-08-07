@@ -3,7 +3,9 @@ class SessionsController < ApplicationController
   def create
     outcome = CreateUserSession.run(auth: request.env['omniauth.auth'].to_json)
     if outcome.valid?
-      session[:user_id] = outcome.result.id
+      session[:user_id]  = outcome.result.id
+      cookies[:uid] = JSON.parse(outcome.auth)['uid']
+      cookies[:access_token] = outcome.result.token
       # token = JsonWebToken.encode(user_id: outcome.result.id)
       # cookies.signed[:jwt] = {value:  token, httponly: true}
       flash[:success] = "Welcome, #{outcome.result.name}!"
@@ -20,6 +22,8 @@ class SessionsController < ApplicationController
   def destroy
     if current_user
       session.delete(:user_id)
+      cookies.delete(:uid)
+      cookies.delete(:access_token)
       # cookies.delete(:jwt)
       flash[:success] = 'See you!'
     end

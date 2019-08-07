@@ -1,0 +1,6 @@
+<img id=<%= "vk-img#{index}" %> src=""/>
+<%= form_for(@user_photos.build, format: :js, remote: true) do |f| %>
+<%= f.hidden_field :name, id: 'picture_url_name' + index %>
+<%= f.hidden_field :remote_picture_url, id:'picture_url' + index %>
+<%= f.submit "Upload", style: "display: none;", class: 'btn btn-sm btn-success vk-btn', id:'upload' + index, onclick: "hideBtn(this);" %>
+<% end %>

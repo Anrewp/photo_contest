@@ -530,6 +530,52 @@ margin-bottom: 5px;
   justify-content: space-between;
 }
 
+.vk-upload{
+  width: 44%;
+  text-align: right;
+}
+.vk-form{
+  width: 90px;
+  float:left;
+  margin-right: 10px;
+  margin-bottom:10px;
+}
+#vk{
+  &:focus,
+  &:hover,
+  &:active,
+  &:active:hover,
+  &:target,
+  &:focus-within{
+    outline: none;
+  }
+}
+#vk{
+  &:focus{
+  background-color: #5cb85c;
+    border-color: #4cae4c;
+  }
+}
+
+.vk-btn{
+padding: 1px 10px;
+height: 20px;
+width: 70px;
+margin-bottom: 10px;
+margin-top: 3px;
+}
+
+#vk-img0,
+#vk-img1,
+#vk-img2,
+#vk-img3,
+#vk-img4,{
+  display:none;
+  height: 90px;
+  width: 90px;
+  border-radius: 5px;
+}
+
 #token{
   width: 30px;
   height: 30px;

@@ -38,6 +38,7 @@ gem 'active_model_serializers'
 gem 'jwt'
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
+gem 'rack-cors'
 
 
 # Use Redis adapter to run Action Cable in production

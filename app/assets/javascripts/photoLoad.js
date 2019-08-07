@@ -16,6 +16,8 @@ function readURL(input) {
 
   //For user upload form
  $(document).on('change','#photo_picture', function() { 
+  $('.vk-form').hide()
+  $('#vk').show()
     if(this.files[0] != undefined){
     var size_in_megabytes = this.files[0].size/1024/1024;
     if (size_in_megabytes > 5) {

@@ -10,8 +10,8 @@ function getUserToken() {
                $("#token").fadeOut(500);
                setTimeout(function() {
                 $('#token-li').css('display','none'); 
-                $('#credentials-token').css('display','block').fadeOut();
-                $('#credentials-token').fadeIn(300);
+                // $('#credentials-token').css('display','block').fadeOut();
+                $('#credentials-token').slideDown(600);
                }, 500);
 
             }

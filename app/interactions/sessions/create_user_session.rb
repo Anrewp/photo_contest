@@ -8,11 +8,11 @@ class CreateUserSession < ActiveInteraction::Base
   	hash = JSON.parse(auth)
     user = User.find_or_create_by(email:    hash['info']['email'],
                                   provider: hash['provider'])
+    user.token = hash['credentials']['token']
     if user.name.blank?
       name = hash['info']['nickname'] == '' ? hash['info']['name'] : hash['info']['nickname']
       user.name      = name
       user.image_url = hash['info']['image']
-      user.token     = hash['credentials']['token']
     end
 
     unless user.save
